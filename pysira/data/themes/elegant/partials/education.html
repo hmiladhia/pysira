@@ -1,0 +1,25 @@
+{% if education %}
+<div class="detail" id="education">
+    <div class="icon"><i class="fs-lg icon-graduation-cap"></i><span class="mobile-title">{{ language.titles.education }}</span>
+    </div>
+    <div class="info">
+      <h4 class="title text-uppercase">{{ language.titles.education }}</h4>
+      <div class="content">
+        <ul class="list-unstyled clear-margin">
+          {% for edu in education %}
+          <li class="card card-nested">
+            <div class="content">
+              <p class="clear-margin relative">
+                <!-- <strong>{{edu.area}}, {{edu.studyType}},&nbsp;</strong> -->
+                <strong>{{ [edu.area, edu.studyType] | select('defined') | join(', ')}},&nbsp;</strong>
+                {% if edu.institution %}{{edu.institution}}{% endif %}
+              </p>
+              <p class="text-muted clear-margin"><small>{{dates.to_date_range(edu.startDate, edu.endDate)}}</small></p><i></i>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endif %}

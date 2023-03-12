@@ -1,0 +1,16 @@
+\BLOCK{ if education }
+
+\cvsection{\VAR{language.titles.education}}
+
+\BLOCK{ for edu in education }
+\cvevent{\VAR{edu.studyType}}{\BLOCK{ for inst in edu.institution.split("/") }\cvpart{\faUserGraduate \VAR{inst}}\BLOCK{ endfor }}{\VAR{ dates.get_year(edu.startDate) } - \VAR{ dates.get_year(edu.endDate) }}{France - Tunisia}
+\BLOCK{if edu.area}
+{\small \VAR{language.phrases.specialized} \textbf{\VAR{edu.area | escape}}}
+\BLOCK{ endif}
+\BLOCK{if edu.score}
+{\small \VAR{edu.score}}
+\BLOCK{ endif }
+
+\VAR{ "\divider" if not loop.last else "" }
+\BLOCK{ endfor }
+\BLOCK{ endif }

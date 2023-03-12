@@ -1,0 +1,20 @@
+\BLOCK{ macro get_month(date) }\BLOCK{ if date }\BLOCK{ set date = date | parse_date }\BLOCK{ set month_idx = date.strftime('%m') | int}\VAR{ language.months[month_idx - 1] }\BLOCK{ endif }\BLOCK{ endmacro }
+\BLOCK{ macro get_year(date) }\BLOCK{ if date }\BLOCK{ set date = date | parse_date }\VAR{ date.strftime('%Y') }\BLOCK{ endif }\BLOCK{ endmacro }
+\BLOCK{- macro to_date_range(startDate, endDate) -}
+\BLOCK{ set endDateMonth = get_month(endDate) }
+\BLOCK{ set endDateYear = get_year(endDate) }
+\BLOCK{ if startDate }
+  \BLOCK{ set startDateMonth = get_month(startDate) }
+  \BLOCK{ set startDateYear = get_year(startDate) }
+  \BLOCK{ set endDateMonth = get_month(endDate) }
+  \BLOCK{ set endDateYear = get_year(endDate) }
+
+  \BLOCK{  if (startDateMonth == endDateMonth) and (startDateYear == endDateYear) }
+  \VAR{ startDateMonth } \VAR{ startDateYear }
+  \BLOCK{  else  }
+    \BLOCK{  if not endDate }\VAR{ startDateMonth } \VAR{ startDateYear } - \VAR{ language.phrases.present }
+    \BLOCK{  else  }\VAR{ startDateMonth } \VAR{ startDateYear } - \VAR{ endDateMonth } \VAR{ endDateYear }
+    \BLOCK{  endif  }
+  \BLOCK{  endif  }
+\BLOCK{  endif  }
+\BLOCK{  endmacro  }

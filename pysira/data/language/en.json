@@ -1,0 +1,48 @@
+{
+    "titles": {
+        "work": "Professional experience",
+        "work_short": "Work",
+        "projects": "Projects",
+        "languages": "Languages",
+        "summary": "About",
+        "skills": "Skills",
+        "education": "Education",
+        "certificates": "Certificates",
+        "awards": "Awards",
+        "interests": "Interests",
+        "references": "References",
+        "volunteer": "Volunteer",
+        "contact": "Contact",
+        "profiles": "Profiles"
+
+    },
+    "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ],
+    "phrases": {
+        "specialized": "Specialized in",
+        "present": "Present",
+        "background": "Background",
+        "highlights": "Highlights",
+        "phone": "Phone",
+        "email": "Email",
+        "website": "Website",
+        "grade": "Grade",
+        "courses": "Courses",
+        "results": "Results"
+    },
+    "countries": {
+        "FR": "France"
+    }
+}

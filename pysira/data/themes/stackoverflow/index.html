@@ -1,0 +1,33 @@
+{% import 'utility_macros.html' as utils with context %}
+
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>{% if basics %}{{ basics['name'] }}{% endif %}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk">
+
+  <style>
+    {% include 'style.css' %}
+  </style>
+
+  </head>
+  <body>
+
+  <div id="resume">
+    {% include 'partials/basics.html' %}
+    {% include 'partials/skills.html' %}
+    {% include 'partials/work.html' %}
+    {% include 'partials/projects.html' %}
+    {% include 'partials/volunteer.html' %}
+    {% include 'partials/education.html' %}
+    {% include 'partials/awards.html' %}
+    {% include 'partials/publications.html' %}
+    {% include 'partials/languages.html' %}
+    {% include 'partials/interests.html' %}
+    {% include 'partials/references.html' %}
+  </div>
+
+  </body>
+</html>

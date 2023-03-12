@@ -1,0 +1,14 @@
+\BLOCK{ if awards }
+\cvsection{\VAR{ language.titles.awards }}
+
+\BLOCK{ for award in awards -}
+\cvachievement{\faTrophy}{\VAR{award.title}}{\VAR{award.summary}}
+
+\VAR{ "\divider" if not loop.last else "" }
+\BLOCK{ endfor -}
+
+%\cvachievement{\faTrophy}{Courage I had}{to take a sinking ship and try to make it float}
+%\cvachievement{\faHeartbeat}{Persistence \& Loyalty}{I showed despite the hard moments and my willingness to stay with Yahoo after the acquisition}
+%\cvachievement{\faChartLine}{Google's Growth}{from a hundred thousand searches per day to over a billion}
+%\cvachievement{\faFemale}{Inspiring women in tech}{Youngest CEO on Fortune's list of 50 most powerful women}
+\BLOCK{ endif }

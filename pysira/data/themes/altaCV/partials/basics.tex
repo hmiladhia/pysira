@@ -1,0 +1,25 @@
+\BLOCK{- if basics -}
+\name{\VAR{basics.name}}
+\tagline{\VAR{basics.label}}
+%% You can add multiple photos on the left or right
+\photoR{\VAR{ options.photo_size }}{\VAR{basics.image}}
+%\photoL{2cm}{Yacht_High,Suitcase_High}
+\personalinfo{%
+  % Not all of these are required!
+  % You can add your own with \printinfo{symbol}{detail}
+  \BLOCK{ if basics.email }\email{\VAR{basics.email}}\BLOCK{ endif }
+  \BLOCK{ if basics.phone }\phone{\VAR{basics.phone}}\BLOCK{ endif }
+  \BLOCK{ if basics.location }\location{\VAR{[basics.location.address, basics.location.postalCode, basics.location.city, utils.get_country_name(basics.location.countryCode)] | select('defined') | join(', ')}}\BLOCK{ endif }
+  \BLOCK{ if basics.url }\homepage{\VAR{basics.url}}\BLOCK{ endif }
+
+  \BLOCK{ for profile in basics.profiles}
+  \printinfo{\fa\VAR{profile.network.replace('-', ' ').title().replace(' ', '')}}{\VAR{profile.username}}[\VAR{profile.url}]
+  \BLOCK{ endfor }
+
+  % \printinfo{\faPaw}{Hey ho!}
+  %% Or you can declare your own field with
+  % \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
+  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \gitlab{your_id}
+}
+\BLOCK{ endif -}

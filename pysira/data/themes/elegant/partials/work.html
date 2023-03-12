@@ -1,0 +1,35 @@
+{% if work %}
+<div class="detail" id="work-experience">
+    <div class="icon"><i class="fs-lg icon-office"></i><span class="mobile-title">{{ language.titles.work }}</span></div>
+    <div class="info">
+        <h4 class="title text-uppercase">{{ language.titles.work }}</h4>
+        <ul class="list-unstyled clear-margin">
+            {% for wor in work %}
+            <li class="card card-nested clearfix">
+                <div class="content">
+                    <p class="clear-margin relative">
+                        {% if not wor.endDate %}<i class="icon-circle current-event" rel="tooltip" title="Currently Working" data-placement="left"></i>{% endif %}
+                        <strong>{{wor.position}}</strong>,&nbsp;{{wor.name}}
+                    </p>
+                    <p class="text-muted"><small><span class="space-right">{{dates.to_date_range(wor.startDate, wor.endDate)}}</span></small></p>
+                    {% if wor.summary %}
+                    <div class="mop-wrapper space-bottom">
+                        <p>{{wor.summary}}</p>
+                    </div>
+                    {% endif %}
+                    {% if wor.highlights %}
+                    <ul>
+                        {% for hig in wor.highlights %}
+                        <li class="mop-wrapper">
+                            <p>{{hig}}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,37 @@
+{% if volunteer -%}
+<div class="box">
+  <h2><i class="fas fa-users ico"></i> {{language.titles.volunteer}}</h2>
+  {% for vol in volunteer -%}
+  <div class="job clearfix">
+    <div class="row">
+      <div class="details">
+        {% if vol.organization %}<div class="where">{{vol.organization}}</div> {% endif %}
+        {% if vol.url -%}
+        <div class="address">
+          <a href="{{vol.url}}" target="_blank"><i class="fas fa-globe ico"></i>
+            {{vol.url}}</a>
+        </div>
+        {%- endif %}
+        <div class="year">{{ dates.to_date_range(vol.startDate, vol.endDate) }}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="job-details col-xs-11">
+        {% if vol.position %}<div class="profession">{{vol.position}}</div>{% endif %}
+        <div class="description">
+          {% if vol.summary %}{{vol.summary}}{% endif %}
+          {% if vol.highlights -%}
+          <div class="highlights">{{language.phrases.highlights}}</div>
+          <ul class="list-group">
+            {% for hig in vol.highlights -%}
+            <li class="list-group-item">{{hig}}</li>
+            {%- endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{%- endif %}

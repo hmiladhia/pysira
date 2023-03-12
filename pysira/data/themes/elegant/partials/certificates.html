@@ -1,0 +1,22 @@
+{% if certificates %}
+<div class="detail" id="certificates">
+    <div class="icon"><i class="fs-lg icon-profile"></i><span class="mobile-title">{{ language.titles.certificates }}</span></div>
+    <div class="info">
+        <h4 class="title text-uppercase">{{ language.titles.certificates }}</h4>
+        <div class="content">
+            <ul class="list-unstyled clear-margin">
+                {% for cer in certificates %}
+                <li class="card card-nested">
+                    <div class="content">
+                        <p class="clear-margin" itemprop="certificate"><strong><a href="{{cer.url}}"
+                                    target="_blank">{{cer.name}}</a>,&nbsp;</strong>{{cer.issuer}}</p>
+                        <p class="text-muted"><small>Issued on: dates.to_date_range(cer.startDate, cer.startDateMonth,
+                            cer.startDateYear, cer.endDate, cer.endDateMonth, cer.endDateYear)</small></p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

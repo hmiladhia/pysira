@@ -1,0 +1,44 @@
+{% if work -%}
+<div class="box">
+    <h2><i class="fas fa-suitcase ico"></i> {{ language.titles.work }}</h2>
+    {% for job in work -%}
+    <div class="job clearfix">
+        <div class="row">
+            <div class="details">
+                <div class="where">
+                    {{job.name}}
+                    {%- if job.location %}
+                    <div class="pull-right">
+                        {{job.location}}
+                    </div>
+                    {%- endif %}
+                </div>
+                {% if job.url -%}
+                <div class="address">
+                    <a href="{{ job.url }}" target="_blank"><i class="fas fa-globe ico"></i>
+                        {{ job.url }}</a>
+                </div>
+                {%- endif %}
+                <div class="year">{{ dates.to_date_range(job.startDate, job.endDate) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="job-details col-xs-11">
+                <div class="profession">{{ job.position }}</div>
+                <div class="description">
+                    {% if job.summary %}{{job.summary}}{%- endif %}
+                    {% if job.highlights -%}
+                    <div class="highlights">{{ language.phrases.highlights }}</div>
+                    <ul class="list-group">
+                        {% for hig in job.highlights -%}
+                            <li class="list-group-item">{{hig}}</li>
+                        {%- endfor %}
+                    </ul>
+                    {%- endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {%- endfor %}
+</div>
+{%- endif %}

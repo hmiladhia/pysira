@@ -1,0 +1,13 @@
+\BLOCK{ if languages }
+
+\cvsection{\VAR{language.titles.languages}}
+
+\BLOCK{ if options.compact }
+\BLOCK{ for language in languages }\cvtag{\VAR{language.language}} \BLOCK{ endfor }
+\BLOCK{ else }
+\BLOCK{ for language in languages }
+\cvskill{\large \VAR{language.language}}{5}
+\BLOCK{ endfor }
+\BLOCK{ endif }
+
+\BLOCK{ endif }

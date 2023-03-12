@@ -1,0 +1,20 @@
+\BLOCK{ if work }
+
+\cvsection{\VAR{language.titles.work}}
+
+\BLOCK{ for w in work }
+\cvevent{\VAR{w.position}}{\VAR{w.name | escape}}{\VAR{dates.to_date_range(w.startDate, w.endDate)}}{\VAR{w.location}}
+
+\begin{itemize}
+\BLOCK{ for highlight in w.highlights }
+  \item \VAR{highlight | escape}
+\BLOCK{ endfor }
+\end{itemize}
+
+\BLOCK{ if options.compact }
+\VAR{ "\divider\smallskip" if not loop.last else "" }
+\BLOCK{ else }
+\VAR{ "\divider" if not loop.last else "" }
+\BLOCK{ endif }
+\BLOCK{ endfor }
+\BLOCK{ endif }

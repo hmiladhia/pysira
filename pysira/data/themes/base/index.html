@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+    <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <title>{{ basics.name }}</title>
+
+    </head>
+
+    <body>
+
+        <h1>{{ basics.name }}</h1>
+        {% if basics.label %}<h2>{{ basics.label }}</h2>{% endif %}
+
+        <h3>Contact</h3>
+        <ul>
+            {% if basics.email %} <li><a href="mailto:{{ basics.email }}">{{ basics.email }}</a></li>{% endif %}
+            {% if basics.phone %} <li><a href="tel:{{ basics.phone }}">{{ basics.phone }}</a></li>{% endif %}
+            {% if basics.url %} <li><a href="{{ basics.url }}">{{ basics.url }}</a></li>{% endif %}
+        </ul>
+
+        {% if basics.summary -%}
+        <h3>About</h3>
+        <p>{{ basics.summary }}</p>
+        {%- endif %}
+
+        {% if basics.profiles -%}
+        <h3>Profiles</h3>
+        <ul>
+        {% for profile in basics.profiles -%}
+            <li>
+                {{ profile.network }} -
+                <a href="{{ profile.url }}">{{ profile.username | d(profile.url) }}</a>
+            </li>
+        {%- endfor %}
+        </ul>
+        {%- endif %}
+
+    </body>
+
+</html>

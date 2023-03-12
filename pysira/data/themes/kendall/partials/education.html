@@ -1,0 +1,38 @@
+{% if education %}
+<div class="box">
+  <h2><i class="fas fa-university ico"></i> {{ language.titles.education }}</h2>
+  <ul id="education" class="clearfix">
+    {% for edu in education -%}
+    <li>
+      <div class="year pull-left">{{ dates.get_year(edu.startDate)}} {{ dates.get_year(edu.endDate) }}</div>
+      <div class="description pull-right">
+        <h3>{{edu.institution}}</h3>
+        <div class="where"></div>
+        {% if edu.url -%}
+          <div class="address">
+            <a href="{{edu.url}}" target="_blank"><i class="fas fa-globe ico"></i>
+              {{edu.url}}</a>
+          </div>
+        {%- endif %}
+        {% if edu.studyType %}<p><i class="fas fa-graduation-cap ico"></i> {{edu.studyType}}</p>{% endif %}
+        {% if edu.area %}<p>{{edu.area}}</p>{% endif %}
+        {% if edu.score -%}
+        <p>
+          {{edu.score}}
+        </p>
+        {%- endif %}
+        {% if edu.courses -%}
+        <div>{{ language.phrases.courses }}</div>
+        <ul class="list-group">
+          {% for course in edu.courses -%}
+          <li class="list-group-item">{{course}}</li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </div>
+    </li>
+    {%- endfor %}
+
+  </ul>
+</div>
+{%- endif %}

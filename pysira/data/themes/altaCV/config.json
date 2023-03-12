@@ -1,0 +1,18 @@
+{
+  "name": "altaCV",
+  "markup": "latex",
+  "entry": "main.tex",
+  "static": ["altacv.cls"],
+  "default_options": {
+    "compact": true,
+    "normalphoto": false,
+    "column_ratio": 0.6,
+    "batch_number": null,
+    "left": "1.25cm",
+    "right": "1.25cm",
+    "top": "1.5cm",
+    "bottom": "1.5cm",
+    "columnsep": "1.25cm",
+    "photo_size": "3.5cm"
+  }
+}

@@ -1,0 +1,12 @@
+{% if projects -%}
+<div class="box">
+    <h2><i class= "fas fa-code-branch ico"></i> {{language.titles.projects}}</h2>
+    <ul class="list-group">
+    {% for pro in projects -%}
+      <li class="list-group-item">
+        <span style="font-weight:bold">{{pro.name}}</span>{% if pro.descriptions %}: {{pro.description}}{% endif %}
+      </li>
+    {%- endfor %}
+    </ul>
+  </div>
+{%- endif %}

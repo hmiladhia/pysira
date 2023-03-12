@@ -1,0 +1,18 @@
+{% if skills -%}
+<div class="box">
+  <h2><i class="fas fa-tasks ico"></i> {{ language.titles.skills }}</h2>
+  {% for ski in skills -%}
+  <div class="skills clearfix">
+    <div class="item-skills">
+      {{ski.name}}
+      {% if ski.level %}<span class="skill-level">{{ski.level}}</span>{% endif %}
+    </div>
+    <div class="col-sm-offset-1 col-sm-12 clearfix">
+      {% for key in ski.keywords -%}
+      <span class="skill badge">{{key}}</span>
+      {%- endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+</div>
+{%- endif %}

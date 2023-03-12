@@ -1,0 +1,23 @@
+{% if awards %}
+<div class="detail" id="awards">
+    <div class="icon"><i class="fs-lg icon-trophy"></i><span class="mobile-title">Awards</span></div>
+    <div class="info">
+        <h4 class="title text-uppercase">Awards</h4>
+        <div class="content">
+            <ul class="list-unstyled clear-margin">
+                {% for awa in awards %}
+                <li class="card card-nested">
+                    <div class="content">
+                        <p class="clear-margin" itemprop="award"><strong>{{awa.title}} </strong>,&nbsp;{{awa.awarder}}
+                        </p>
+                        <!-- TODO: update date -->
+                        <p class="text-muted"><small>Awarded on: </small></p>
+                        <div class="mop-wrapper"></div>
+                    </div>
+                </li>
+                {% endfor%}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

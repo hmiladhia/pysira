@@ -1,0 +1,150 @@
+\BLOCK{- import 'date_macros.tex' as dates with context -}
+\BLOCK{- import 'utility_macros.tex' as utils with context -}
+\BLOCK{- macro keywords(keywords) }
+\BLOCK{ for keyword in keywords }\cvtag{\VAR{keyword | escape}}\BLOCK{ endfor }
+\BLOCK{- endmacro -}
+%%%%%%%%%%%%%%%%%
+% This is an example CV created using altacv.cls (v1.3, 10 May 2020) written by
+% LianTze Lim (liantze@gmail.com), based on the
+% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
+%
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%%%%%%%%%%%%%%%
+
+%% If you are using \orcid or academicons
+%% icons, make sure you have the academicons
+%% option here, and compile with XeLaTeX
+%% or LuaLaTeX.
+% \documentclass[10pt,a4paper,academicons]{altacv}
+
+%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
+
+\BLOCK{ if options.normalphoto }
+\documentclass[10pt,letter,normalphoto,withhyper]{altacv}
+\BLOCK{ else }
+\documentclass[10pt,letter,ragged2e,withhyper]{altacv}
+\BLOCK{ endif }
+
+%% AltaCV uses the fontawesome5 and academicon fonts and packages.
+%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/academicons for full list of symbols.
+%% You MUST compile with XeLaTeX or LuaLaTeX if you want to use academicons.
+
+% Change the page layout if you need to
+\geometry{left=\VAR{ options.left | d('1.25cm') },right=\VAR{ options.right | d('1.25cm') },top=\VAR{ options.top | d('1.5cm') },bottom=\VAR{ options.bottom | d('1.5cm') },columnsep=\VAR{ options.columnsep | d('1.2cm') }}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
+
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+\ifxetexorluatex
+  % If using xelatex or lualatex:
+  \setmainfont{Lato}
+\else
+  % If using pdflatex:
+  \usepackage[default]{lato}
+\fi
+
+% Change the colours if you want to
+\definecolor{VividPurple}{HTML}{3E0097}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\definecolor{LimeGreen}{HTML}{11710E}
+\definecolor{Blue}{HTML}{253489}
+\definecolor{Teal}{HTML}{109EAA}
+\definecolor{Silver}{HTML}{B5B5B5}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\definecolor{DarkPastelRed}{HTML}{450808}
+\definecolor{PastelRed}{HTML}{8F0D0D}
+\definecolor{GoldenEarth}{HTML}{E7D192}
+
+\colorlet{name}{black}
+\colorlet{tagline}{Blue}
+\colorlet{heading}{Blue}
+\colorlet{headingrule}{Blue}
+\colorlet{subheading}{Blue}
+\colorlet{accent}{Blue}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Change some fonts, if necessary
+\BLOCK{ if options.fonts -}
+\BLOCK{ if options.fonts.namefont -}
+\renewcommand{\namefont}{\VAR{ options.fonts.namefont }}
+% \renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\BLOCK{- endif }
+\BLOCK{ if options.fonts.personalinfofont -}
+\renewcommand{\personalinfofont}{\VAR{ options.fonts.personalinfofont }}
+% \renewcommand{\personalinfofont}{\footnotesize}
+\BLOCK{- endif }
+\BLOCK{ if options.fonts.cvsectionfont -}
+\renewcommand{\cvsectionfont}{\VAR{ options.fonts.cvsectionfont }}
+% \renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\BLOCK{- endif }
+\BLOCK{ if options.fonts.cvsubsectionfont -}
+\renewcommand{\cvsubsectionfont}{\VAR{ options.fonts.cvsubsectionfont }}
+% \renewcommand{\cvsubsectionfont}{\large\bfseries}
+\BLOCK{- endif }
+\BLOCK{- endif }
+
+% Change the bullets for itemize and rating marker
+% for \cvskill if you want to
+\renewcommand{\itemmarker}{\VAR{ options.itemmarker | d('{\\small\\textbullet}') }}
+\renewcommand{\ratingmarker}{\VAR{ options.ratingmarker | d('\\faCircle') }}
+
+\BLOCK{ if options.compact }
+\renewcommand{\divider}{\vspace{-0.2cm}\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\smallskip\vspace{-0.1cm}} %\medskip
+\BLOCK{ else }
+\renewcommand{\divider}{\textcolor{body!30}{\hdashrule{\linewidth}{0.6pt}{0.5ex}}\medskip}
+\BLOCK{ endif }
+
+
+
+%% sample.bib contains your publications
+\BLOCK{ if publications }
+\addbibresource{sample.bib}
+\BLOCK{ endif }
+
+\begin{document}
+\newcommand{\cvpart}[1]{\ifstrequal{#1}{}{}{{\small\makebox[0.5\linewidth][l]{~#1}}}}
+
+\BLOCK{ include 'partials/basics.tex' }
+
+\makecvheader
+\BLOCK{ if options.compact }\vspace{-0.5cm}\BLOCK{ endif }
+
+%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
+\AtBeginEnvironment{itemize}{\small}
+
+%% Set the left/right column width ratio to 6:4.
+\columnratio{\VAR{ options.column_ratio | d('0.6') }}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+\BLOCK{ include 'partials/work.tex' }
+\BLOCK{ include 'partials/projects.tex' }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switch to the right column. This will now automatically move to the second
+%% page if the content is too long.
+\switchcolumn
+\BLOCK{ include 'partials/about.tex' }
+\BLOCK{ include 'partials/education.tex' }
+\BLOCK{ include 'partials/skills.tex' }
+\BLOCK{ include 'partials/awards.tex' }
+\BLOCK{ include 'partials/languages.tex' }
+\BLOCK{ include 'partials/certificates.tex' }
+\BLOCK{ include 'partials/publications.tex' }
+
+\end{paracol}
+
+\end{document}

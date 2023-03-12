@@ -1,0 +1,22 @@
+{% if publications -%}
+<div class="box">
+    <h2><i class="fas fa-book ico"></i> {{ language.titles.publications }}</h2>
+    {% for pub in publications -%}
+    <div class="publication panel panel-default">
+      <div class="panel-heading">
+        <div class="name panel-title">{{pub.name}}</div>
+      </div>
+      <div class="panel-body">
+        <div class="publisher"><i class= "fas fa-bookmark ico"></i> {{pub.publisher}}</div>
+        <div class="year">{{ dates.get_day(pub.date) }} {{ dates.get_month(pub.date) }} {{ dates.get_year(pub.date) }}</div>
+        {% if pub.publisher -%}
+        <div class="address">
+          <a href="{{pub.publisher}}" target= "_blank"><i class="fas fa-globe ico"></i> {{pub.publisher}}</a>
+        </div>
+        {%- endif %}
+        {% if pub.summary -%}<p>{{ pub.summary }}</p>{% endif %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+{%- endif %}

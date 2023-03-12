@@ -1,0 +1,58 @@
+{%- import 'date_macros.html' as dates with context -%}
+{%- import 'utility_macros.html' as utils with context -%}
+<!DOCTYPE html>
+<html class="wf-lato-n4-active wf-lato-n7-active wf-lato-n3-active wf-active" lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{basics.name}}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+      {% include 'style.css' %}
+  </style>
+
+</head>
+
+<body itemscope="itemscope" itemtype="http://schema.org/Person">
+  <div class="container-fluid">
+    <div class="row main clearfix"><a class="js-floating-nav-trigger floating-nav-trigger" href="#"><i
+          class="icon-bars"></i><span class="close-icon">×</span></a>
+      <nav class="floating-nav js-floating-nav">
+        <ul class="list-unstyled">
+          {% if basics.summary %}<li><a href="#about"><i class="mr-10 icon-board"></i>{{ language.titles.summary }}</a></li>{% endif %}
+          {% if work %}<li><a href="#work-experience"><i class="mr-10 icon-office"></i>{{ language.titles.work }}</a></li>{% endif %}
+          {% if projects %}<li><a href="#projects-experience"><i class="mr-10 icon-code"></i>{{ language.titles.projects }}</a></li>{% endif %}
+          {% if skills %}<li><a href="#skills"><i class="mr-10 icon-tools"></i>{{ language.titles.skills }}</a></li>{% endif %}
+          {% if education %}<li><a href="#education"><i class="mr-10 icon-graduation-cap"></i>{{ language.titles.education }}</a></li>{% endif %}
+          {% if certificates %}<li><a href="#certificates"><i class="mr-10 icon-profile"></i>{{ language.titles.certificates }}</a></li>{% endif %}
+          {% if awards %}<li><a href="#awards"><i class="mr-10 icon-trophy"></i>{{ language.titles.awards }}</a></li>{% endif %}
+          {% if interests %}<li><a href="#interests"><i class="mr-10 icon-heart"></i>{{ language.titles.interests }}</a></li>{% endif %}
+          {% if references %}<li><a href="#references"><i class="mr-10 icon-thumbs-up"></i>{{ language.titles.references }}</a></li>{% endif %}
+        </ul>
+      </nav>
+      {% include 'partials/basics.html' %}
+      <section class="col-md-9 card-wrapper pull-right">
+        <div class="card background-card" style="min-height: 816px;">
+          <h4 class="text-uppercase">{{ language.phrases.background }}</h4>
+          <hr>
+          <div class="background-details">
+            {% include 'partials/about.html' %}
+            {% include 'partials/work.html' %}
+            {% include 'partials/projects.html' %}
+            {% include 'partials/skills.html' %}
+            {% include 'partials/education.html' %}
+            {% include 'partials/certificates.html' %}
+            {% include 'partials/awards.html' %}
+            {% include 'partials/interests.html' %}
+            {% include 'partials/references.html' %}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+{% include 'scripts.html' %}
+</body>
+</html>

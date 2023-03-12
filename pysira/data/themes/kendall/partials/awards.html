@@ -1,0 +1,17 @@
+{% if awards -%}
+<div class="box">
+    <h2><i class="fas fa-certificate ico"></i> {{ language.titles.awards }}</h2>
+    <ul id="awards" class="clearfix">
+        {% for awa in awards -%}
+        <li>
+            <div class="year pull-left">{{ dates.get_month(awa.date) }} {{ dates.get_year(awa.date) }}</div>
+            <div class="description pull-right">
+                <h3>{{awa.awarder}}</h3>
+                <p><i class="fas fa-trophy ico"></i> {{awa.title}}</p>
+                <p>{{awa.summary}}</p>
+            </div>
+        </li>
+        {%- endfor %}
+    </ul>
+</div>
+{%- endif %}

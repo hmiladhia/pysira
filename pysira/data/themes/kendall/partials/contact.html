@@ -1,0 +1,37 @@
+<div class="box clearfix">
+    <h2><i class="fas fa-bullseye ico"></i> {{ language.titles.contact }}</h2>
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fas fa-map-marker fa-fw"></span></div>
+
+        <div class="title only  pull-right">{{basics.location.city}}, {{basics.location.region}}
+            {{basics.location.postalCode}} {{ utils.get_country_name(basics.location.countryCode) }}</div>
+    </div>
+    {% if basics.phone -%}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fas fa-phone fa-fw"></span></div>
+        <div class="title only pull-right">{{basics.phone}}</div>
+    </div>
+    {%- endif %}
+    {% if basics.email -%}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fas fa-envelope fa-fw"></span></div>
+        <div class="title only pull-right"><a href="mailto:{{basics.email}}@gmail.com"
+            target="_blank">{{basics.email}}</a></div>
+    </div>
+    {%- endif %}
+    {% if basics.url -%}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fas fa-globe fa-fw"></span></div>
+        <div class="title only pull-right"><a href="{{basics.url}}"
+            target="_blank">{{basics.url}}</a></div>
+    </div>
+    {%- endif %}
+    {% for pro in basics.profiles -%}
+    <div class="contact-item">
+        <div class="icon pull-left text-center"><span class="fab fa-{{pro.network}} fa-fw"></span></div>
+        <div class="title pull-right">{{pro.network}}</div>
+        <div class="description pull-right"><a href="{{pro.url}}" target="_blank">{{pro.username}}</a>
+        </div>
+    </div>
+    {%- endfor %}
+</div>

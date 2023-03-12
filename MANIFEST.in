@@ -1,0 +1,2 @@
+include pysira/VERSION
+recursive-include pysira/data/*

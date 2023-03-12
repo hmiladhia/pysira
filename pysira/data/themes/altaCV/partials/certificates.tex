@@ -1,0 +1,9 @@
+\BLOCK{ if language.titles.certificates}
+
+\cvsection{\VAR{language.titles.certificates}}
+
+\BLOCK{ for cert in certificates }
+\cvachievement{\faGraduationCap}{\href{\VAR{cert.url}}{\VAR{cert.name | escape }}}{\cvpart{\VAR{cert.issuer | escape}}
+\BLOCK{- if cert.date }\cvpart{\faCalendar \VAR{ dates.get_year(cert.date) } \VAR{ dates.get_year(cert.date) }}\BLOCK{ endif -}}
+\BLOCK{ endfor }
+\BLOCK{ endif }

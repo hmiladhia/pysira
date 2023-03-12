@@ -1,0 +1,53 @@
+{% if basics %}
+<section class="col-md-3 card-wrapper profile-card-wrapper affix">
+    <div class="card profile-card">
+
+        <span class="profile-pic-container">
+            <div class="profile-pic"><img class="media-object img-circle center-block" data-src="holder.js/100x100" alt="{{basics.name}}" src="{% if basics.image_b64 %}data:{{ basics.image_b64_mime_type | d('image/png')}};base64,{{ basics.image_b64 | safe }}{% elif basics.image %}{{ basics.image }}{% else %}data:{{extra.image_b64.anonymous.type}};base64,{{ extra.image_b64.anonymous.bytes | safe }}{% endif %}" itemprop="image"></div>
+            <div class="name-and-profession text-center">
+                {% if basics.name %}<h3 itemprop="name"><b>{{basics.name}}</b></h3>{% endif %}
+                {% if basics.label %}<h5 class="text-muted" itemprop="jobTitle">{{basics.label}}</h5>{% endif %}
+            </div>
+        </span>
+        <hr>
+        <div class="contact-details clearfix">
+            {% if basics.location %}
+            <div class="detail"><span class="icon"><i class="icon fs-lg icon-location"></i></span><span class="info">{{ [basics.location.city, basics.location.region, utils.get_country_name(basics.location.countryCode), basics.location.postalCode] | select('defined') | join(', ')}}</span></div>
+            {% endif %}
+            {% if basics.phone %}
+            <div class="detail"><span class="icon"><i class="icon fs-lg icon-phone"></i></span><span class="info"
+                    itemprop="telephone">{{basics.phone}}</span></div>
+            {% endif %}
+            {% if basics.email %}
+            <div class="detail"><span class="icon"><i class="icon fs-lg icon-mail"></i></span><span class="info"><a
+                        class="link-disguise" href="mailto:{{basics.email}}" itemprop="email">{{basics.email}}</a></span>
+            </div>
+            {% endif %}
+            {% if basics.url %}
+            <div class="detail"><span class="icon"><i class="icon fs-lg icon-link"></i></span><span class="info"><a
+                        href="{{basics.url}}" target="_blank">{{basics.url}}</a></span></div>
+            {% endif %}
+            {% if basics.languages %}
+                <div class="detail">
+                    <span class="icon" title="Languages I speak"><iclass="icon fs-lg icon-language"></iclass=></span>
+                    {% for lan in basics.languages %}
+                        <span class="info">{{lan.language}}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <hr>
+        {% if basics.profiles %}
+        <div class="social-links text-center">
+            <div>
+                {% for pro in basics.profiles %}
+                <a class="fs-2x social-link link-{{pro.network}} icon-{{pro.network}}" href="{{pro.url}}"
+                    target="_blank" data-toggle="tooltip" title=""
+                    data-original-title="{{basics.name}} on {{pro.network}}"></a>
+                    {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}

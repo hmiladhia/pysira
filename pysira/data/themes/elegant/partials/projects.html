@@ -1,0 +1,36 @@
+{% if projects %}
+<div class="detail" id="projects-experience">
+    <div class="icon"><i class="fs-lg icon-code"></i><span class="mobile-title">{{ language.titles.projects }}</span>
+    </div>
+    <div class="info">
+        <h4 class="title text-uppercase">{{ language.titles.projects }}</h4>
+        <ul class="list-unstyled clear-margin">
+            {% for pro in projects %}
+            <li class="card card-nested clearfix">
+                <div class="content">
+                    <p class="clear-margin relative">
+                        {% if not pro.endDate %}<i class="icon-circle current-event" rel="tooltip" title="Currently Working" data-placement="left"></i>{% endif %}
+                        <a href="{{pro.url}}" target="_blank"><strong>{{ pro.name | d(pro.url) }}</strong></a>
+                    </p>
+                    <p class="text-muted"><small><span class="space-right">{{dates.to_date_range(pro.startDate, pro.endDate)}}</span></small></p>
+                    {% if pro.description %}
+                    <div class="mop-wrapper space-bottom">
+                        <p>{{pro.description}}</p>
+                    </div>
+                    {% endif %}
+                    {% if pro.highlights %}
+                    <ul>
+                        {% for hig in pro.highlights %}
+                        <li class="mop-wrapper">
+                            <p>{{hig}}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}

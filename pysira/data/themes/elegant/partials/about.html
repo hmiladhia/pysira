@@ -1,0 +1,13 @@
+{% if basics.summary %}
+<div class="detail" id="about">
+  <div class="icon"><i class="fs-lg icon-board"></i><span class="mobile-title">{{ language.titles.summary }}</span></div>
+  <div class="info">
+    <h4 class="title text-uppercase">{{ language.titles.summary }}</h4>
+    <div class="card card-nested">
+      <div class="content mop-wrapper" itemprop="description">
+        <p>{{basics.summary}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,36 @@
+\BLOCK{ if skills }
+
+\cvsection{\VAR{language.titles.skills}}
+
+\BLOCK{ for skillset in skills }
+\cvsubsection{\VAR{skillset.name | escape }}
+\BLOCK{ if options.batch_number -}
+\BLOCK{ for keywords_batch in skillset.keywords | batch(options.batch_number) -}
+\BLOCK{ for key in keywords_batch -}
+\BLOCK{ set key = key | escape }
+\BLOCK{ set icon = key.replace('-', ' ').title().replace(' ', '') | regex_replace("[^A-Za-z]","") }
+\BLOCK{ if icon == 'Git' }
+\BLOCK{ set icon = 'GitSquare' }
+\BLOCK{ else }
+\providecommand{\fa\VAR{icon}}{}
+\BLOCK{ endif }
+\cvtag{\fa\VAR{icon} \VAR{key}}
+\BLOCK{ endfor }
+
+\BLOCK{ endfor -}
+\BLOCK{ else -}
+\BLOCK{ for key in skillset.keywords -}
+\BLOCK{ set key = key | escape }
+\BLOCK{ set icon = key.replace('-', ' ').title().replace(' ', '') | regex_replace("[^A-Za-z]","") }
+\BLOCK{ if icon == 'Git' }
+\BLOCK{ set icon = 'GitSquare' }
+\BLOCK{ else }
+\providecommand{\fa\VAR{icon}}{}
+\BLOCK{ endif }
+\cvtag{\fa\VAR{icon} \VAR{key}}
+\BLOCK{ endfor }
+\BLOCK{ endif }
+
+\VAR{ "\divider" if not loop.last else "" }
+\BLOCK{ endfor -}
+\BLOCK{endif}

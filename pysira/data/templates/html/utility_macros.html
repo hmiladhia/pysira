@@ -1,0 +1,1 @@
+{% macro get_country_name(country_code) %}{% if country_code %}{{ language.countries[country_code] }}{% else %}{{ country_code }}{% endif %}{% endmacro %}

@@ -1,0 +1,22 @@
+{% macro get_day(date) %}{% if date %}{% set date = date | parse_date %}{{ date.strftime('%d') }}{% endif %}{% endmacro %}
+{% macro get_month(date) %}{% if date %}{% set date = date | parse_date %}{% set month_idx = date.strftime('%m') | int%}{{ language.months[month_idx - 1] }}{% endif %}{% endmacro %}
+{% macro get_year(date) %}{% if date %}{% set date = date | parse_date %}{{ date.strftime('%Y') }}{% endif %}{% endmacro %}
+
+{%- macro to_date_range(startDate, endDate) -%}
+{% set endDateMonth = get_month(endDate) %}
+{% set endDateYear = get_year(endDate) %}
+{% if startDate %}
+  {% set startDateMonth = get_month(startDate) %}
+  {% set startDateYear = get_year(startDate) %}
+  {% set endDateMonth = get_month(endDate) %}
+  {% set endDateYear = get_year(endDate) %}
+
+  {%  if (startDateMonth == endDateMonth) and (startDateYear == endDateYear) %}
+    {{ startDateMonth }} {{ startDateYear }}
+  {%  else  %}
+    {%  if not endDate %}{{ startDateMonth }} {{ startDateYear }} - {{ language.phrases.present }}
+    {%  else  %}{{ startDateMonth }} {{ startDateYear }} - {{ endDateMonth }} {{ endDateYear }}
+    {%  endif  %}
+  {%  endif  %}
+{%  endif  %}
+{%-  endmacro  -%}

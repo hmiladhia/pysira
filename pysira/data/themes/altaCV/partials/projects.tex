@@ -1,0 +1,31 @@
+\BLOCK{ if projects }
+
+\cvsection{\VAR{language.titles.projects}}
+
+\BLOCK{ for p in projects }
+\BLOCK{ if p.type and (p.type.lower() == 'package')}
+\BLOCK{ set icon='\\faCube' }
+\BLOCK{ elif p.type and (p.type.lower() == 'application')}
+\BLOCK{ set icon='\\faLaptop' }
+\BLOCK{ elif p.type and (p.type.lower() in ['talk', 'presentation', 'conference'])}
+\BLOCK{ set icon='\\faCommenting' }
+\BLOCK{ else }
+\BLOCK{ set icon='' }
+\BLOCK{ endif }
+\cvevent{\VAR{ icon } \BLOCK{ if p.url }\href{\VAR{p.url}}{\VAR{p.name | escape }}\BLOCK{ else }\VAR{p.name}\BLOCK{ endif }}{\VAR{keywords(p.keywords)}}{\VAR{dates.to_date_range(p.startDate, p.endDate)}}{}
+
+\BLOCK{ if p.description }
+\VAR{ p.description | escape }
+\BLOCK{ endif }
+
+\BLOCK{ if p.highlights }
+\begin{itemize}
+  \BLOCK{ for highlight in p.highlights }
+    \item \VAR{highlight | escape }
+  \BLOCK{ endfor }
+\end{itemize}
+\BLOCK{ endif }
+
+\VAR{ "\divider" if not loop.last else "" }
+\BLOCK{ endfor }
+\BLOCK{endif}

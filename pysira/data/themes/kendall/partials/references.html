@@ -1,0 +1,13 @@
+{% if references -%}
+<div class="box">
+    <h2><i class= "fas fa-check-square ico"></i> {{ language.titles.references }}</h2>
+    {% for ref in references -%}
+    <blockquote>
+      <div>{{ref.reference}}</div>
+      <footer>
+        <a href="" target= "_blank">{{ref.name}}</a>
+      </footer>
+    </blockquote>{{ "<br>" if not loop.last else "" }}
+    {%- endfor %}
+  </div>
+{%- endif %}
