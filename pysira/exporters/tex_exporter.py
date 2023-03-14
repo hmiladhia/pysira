@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import re
 import shutil
 import subprocess
@@ -125,4 +127,7 @@ def tex_escape(text):
     :param text: a plain text message
     :return: the message escaped to appear correctly in LaTeX
     """
+    if not isinstance(text, str):
+        return text
+
     return _ESCAPE_REGEX.sub(lambda match: _CONV[match.group()], text)

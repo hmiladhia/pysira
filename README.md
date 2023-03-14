@@ -1,4 +1,6 @@
 # Pysira
+![Tests](https://github.com/hmiladhia/pysira/actions/workflows/tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/hmiladhia/pysira/branch/main/graph/badge.svg)](https://codecov.io/gh/hmiladhia/nbmanips)
 
 CLI tool to export [jsonresume](https://jsonresume.org/) files to different formats (html, tex, pdf, ...) and different languages.
 
