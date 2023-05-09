@@ -60,20 +60,18 @@
 \definecolor{Blue}{HTML}{253489}
 \definecolor{Teal}{HTML}{109EAA}
 \definecolor{Silver}{HTML}{B5B5B5}
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
 \definecolor{DarkPastelRed}{HTML}{450808}
 \definecolor{PastelRed}{HTML}{8F0D0D}
 \definecolor{GoldenEarth}{HTML}{E7D192}
 
-\colorlet{name}{black}
-\colorlet{tagline}{Blue}
-\colorlet{heading}{Blue}
-\colorlet{headingrule}{Blue}
-\colorlet{subheading}{Blue}
-\colorlet{accent}{Blue}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
+\colorlet{name}{\VAR{ options.colors.name | d('black') }}
+\colorlet{tagline}{\VAR{ options.colors.tagline | d('Blue') }}
+\colorlet{heading}{\VAR{ options.colors.heading | d('Blue') }}
+\colorlet{headingrule}{\VAR{ options.colors.headingrule | d('Blue') }}
+\colorlet{subheading}{\VAR{ options.colors.subheading | d('Blue') }}
+\colorlet{accent}{\VAR{ options.colors.accent | d('Blue') }}
+\colorlet{emphasis}{\VAR{ options.colors.emphasis | d('SlateGrey') }}
+\colorlet{body}{\VAR{ options.colors.body | d('LightGrey') }}
 
 % Change some fonts, if necessary
 \BLOCK{ if options.fonts -}
