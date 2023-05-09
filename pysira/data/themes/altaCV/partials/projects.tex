@@ -9,6 +9,8 @@
 \BLOCK{ set icon='\\faLaptop' }
 \BLOCK{ elif p.type and (p.type.lower() in ['talk', 'presentation', 'conference'])}
 \BLOCK{ set icon='\\faCommenting' }
+\BLOCK{ elif p.type and (p.type.lower() == 'course')}
+\BLOCK{ set icon='\\faBook' }
 \BLOCK{ else }
 \BLOCK{ set icon='' }
 \BLOCK{ endif }
