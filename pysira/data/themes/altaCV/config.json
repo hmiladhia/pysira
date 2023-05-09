@@ -13,6 +13,16 @@
     "top": "1.5cm",
     "bottom": "1.5cm",
     "columnsep": "1.25cm",
-    "photo_size": "3.5cm"
+    "photo_size": "3.5cm",
+    "colors":{
+      "name": "black",
+      "tagline": "teal",
+      "heading": "teal",
+      "headingrule": "teal",
+      "subheading": "LimeGreen",
+      "accent": "teal",
+      "emphasis": "SlateGrey",
+      "body": "LightGrey"
+    }
   }
 }
