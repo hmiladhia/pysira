@@ -63,6 +63,9 @@
 \definecolor{DarkPastelRed}{HTML}{450808}
 \definecolor{PastelRed}{HTML}{8F0D0D}
 \definecolor{GoldenEarth}{HTML}{E7D192}
+\BLOCK{ for color_name, color in options.custom_colors.items() }
+\definecolor{\VAR{ color_name }}{HTML}{\VAR{ color.replace('#', '') }}
+\BLOCK{ endfor }
 
 \colorlet{name}{\VAR{ options.colors.name | d('black') }}
 \colorlet{tagline}{\VAR{ options.colors.tagline | d('Blue') }}
