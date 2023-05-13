@@ -3,10 +3,11 @@
 \cvsection{\VAR{language.titles.languages}}
 
 \BLOCK{ if options.compact }
-\BLOCK{ for language in languages }\cvtag{\VAR{language.language}} \BLOCK{ endfor }
+\BLOCK{ for lan in languages }\cvtag{\VAR{lan.language}} \BLOCK{ endfor }
 \BLOCK{ else }
-\BLOCK{ for language in languages }
-\cvskill{\large \VAR{language.language}}{5}
+\BLOCK{ for lan in languages }
+\BLOCK{- set level_key=lan.fluency.lower().split(' ')[0] -}
+\cvskill{\large \VAR{lan.language}}{\VAR{ language.fluency.get(level_key, 5) }}
 \BLOCK{ endfor }
 \BLOCK{ endif }
 
