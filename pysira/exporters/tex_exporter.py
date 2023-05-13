@@ -35,6 +35,8 @@ _ESCAPE_REGEX = re.compile(
 
 
 class LatexExporter(ExporterBase):
+    EXT = 'tex'
+
     def __init__(self, config: dict):
         self.config = config
         self.theme_path = Path(config['theme_path']).resolve()
@@ -68,7 +70,7 @@ class LatexExporter(ExporterBase):
         effective_options = self.config.get('default_options', {}).copy()
         effective_options.update(options or {})
 
-        format = 'tex' if format is None else format.lower()
+        format = self.EXT if format is None else format.lower()
 
         if format in {'latex', 'tex'}:
             return self._render(resume, path, language, options=effective_options)
@@ -95,6 +97,7 @@ class LatexExporter(ExporterBase):
         options: dict[str, Any] = None,
     ):
         language = self.get_language_data(language or resume.language)
+        extra = self.get_extra_data(self.EXT)
         resume_dict = resume.dict
 
         image_path = resume_dict.get('basics', {}).get('image_path', [])
@@ -113,7 +116,9 @@ class LatexExporter(ExporterBase):
             else:
                 shutil.copy(str(file), str(target_path.parent))
 
-        latex = self.template.render(**resume_dict, language=language, options=options)
+        latex = self.template.render(
+            **resume_dict, language=language, options=options, extra=extra
+        )
         target_path.write_text(latex)
 
 
