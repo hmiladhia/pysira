@@ -17,13 +17,13 @@
     },
     "months": [
         "Janvier",
-        "F\u00e9vrier",
+        "Février",
         "Mars",
         "Avril",
         "Mai",
         "Juin",
         "Juillet",
-        "Ao\u00fbt",
+        "Août",
         "Septembre",
         "Octobre",
         "Novembre",
@@ -44,5 +44,27 @@
     },
     "countries": {
         "FR": "France"
+    },
+    "level": {
+        "debutant": 1,
+        "bases": 2,
+        "competent": 3,
+        "maitre": 5,
+        "specialiste": 5
+    },
+    "fluency": {
+        "a1": 1,
+        "a2": 2,
+        "b1": 3,
+        "b2": 4,
+        "c1": 5,
+        "c2": 6,
+        "debutant": 1,
+        "elementaire ": 1,
+        "pre-intermediaire": 2,
+        "intermediaire": 3,
+        "independant ": 4,
+        "avance": 5,
+        "maitrise": 6
     }
 }
