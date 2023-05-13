@@ -13,6 +13,8 @@ from pysira.json_resume import Resume
 
 
 class HtmlExporter(ExporterBase):
+    EXT = 'html'
+
     def __init__(self, config, template_path='index.html'):
         self.config = config
         self.theme_path = Path(config['theme_path']).resolve()
@@ -35,9 +37,9 @@ class HtmlExporter(ExporterBase):
         effective_options = self.config.get('default_options', {}).copy()
         effective_options.update(options or {})
 
-        format = 'html' if format is None else format.lower()
+        format = self.EXT if format is None else format.lower()
 
-        if format == 'html':
+        if format == self.EXT:
             return self._render(resume, path, language, effective_options)
 
         if not format.startswith('pdf'):
@@ -62,7 +64,7 @@ class HtmlExporter(ExporterBase):
         language = self.get_language_data(language or resume.language)
         resume_dict = resume.dict
 
-        extra = {}
+        extra = self.get_extra_data(self.EXT)
         options = options or {}
 
         for img_key, img_path in self.config.get('image_b64', {}).items():

@@ -8,26 +8,26 @@
 \BLOCK{ for keywords_batch in skillset.keywords | batch(options.batch_number) -}
 \BLOCK{ for key in keywords_batch -}
 \BLOCK{ set key = key | escape }
-\BLOCK{ set icon = key.replace('-', ' ').title().replace(' ', '') | regex_replace("[^A-Za-z]","") }
-\BLOCK{ if icon == 'Git' }
-\BLOCK{ set icon = 'GitSquare' }
-\BLOCK{ else }
-\providecommand{\fa\VAR{icon}}{}
+\BLOCK{ set icon = key.lower().split(' ')[0] | regex_replace('[_\\/]', '-') | regex_replace("[^A-Za-z\d\-]","") }
+\BLOCK{ if icon == 'git' }
+\BLOCK{ set icon = 'git-square' }
+\BLOCK{ elif icon == 'azure' }
+\BLOCK{ set icon = 'microsoft' }
 \BLOCK{ endif }
-\cvtag{\fa\VAR{icon} \VAR{key}}
+\cvtag{\VAR{ extra.icons.fontawesome.get(icon, '') } \VAR{key}}
 \BLOCK{ endfor }
 
 \BLOCK{ endfor -}
 \BLOCK{ else -}
 \BLOCK{ for key in skillset.keywords -}
 \BLOCK{ set key = key | escape }
-\BLOCK{ set icon = key.replace('-', ' ').title().replace(' ', '') | regex_replace("[^A-Za-z]","") }
-\BLOCK{ if icon == 'Git' }
-\BLOCK{ set icon = 'GitSquare' }
-\BLOCK{ else }
-\providecommand{\fa\VAR{icon}}{}
+\BLOCK{ set icon = key.lower().split(' ')[0] | regex_replace('[_\\/]', '-') | regex_replace("[^A-Za-z\d\-]","") }
+\BLOCK{ if icon == 'git' }
+\BLOCK{ set icon = 'git-square' }
+\BLOCK{ elif icon == 'azure' }
+\BLOCK{ set icon = 'microsoft' }
 \BLOCK{ endif }
-\cvtag{\fa\VAR{icon} \VAR{key}}
+\cvtag{\VAR{ extra.icons.fontawesome.get(icon, '') } \VAR{key}}
 \BLOCK{ endfor }
 \BLOCK{ endif }
 
