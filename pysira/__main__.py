@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -56,10 +58,16 @@ def export(
     factory = ExportFactory(theme)
     exp = factory.build()
 
+    options_dict: dict[str] | None = None
     if options:
-        options = json.loads(Path(options).read_text())
+        options_path = Path(options)
+        options_dict = json.loads(options_path.read_text())
+        options_dict['static'] = [
+            Path(p) if Path(p).is_absolute() else options_path.parent / p
+            for p in options_dict.pop('static', [])
+        ]
 
-    exp.render(resume, output, format_, language=language, options=options)
+    exp.render(resume, output, format_, language=language, options=options_dict)
 
 
 if __name__ == '__main__':
