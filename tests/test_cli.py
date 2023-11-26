@@ -7,6 +7,7 @@ from click.testing import CliRunner
 from pysira.__main__ import cli
 
 example_resume = (Path(__file__).parents[1] / 'examples/resume.json').resolve()
+example_options = (Path(__file__).parents[1] / 'examples/altacv_options.json').resolve()
 
 
 @pytest.fixture
@@ -34,3 +35,24 @@ def test_coverage_cli_html(runner, tmpdir, theme, filename, n_files):
 
     assert len(files_list) == n_files, files_list
     assert filename in files_list
+
+
+def test_coverage_options(runner, tmpdir):
+    runner.invoke(
+        cli,
+        [
+            'export',
+            '-t',
+            'altaCV',
+            '-o',
+            tmpdir,
+            '-op',
+            str(example_options),
+            str(example_resume),
+        ],
+    )
+
+    files_list = {p.name for p in Path(tmpdir).iterdir()}
+
+    assert len(files_list) == 2, files_list
+    assert 'main.tex' in files_list
