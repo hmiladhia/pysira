@@ -61,11 +61,11 @@ class HtmlExporter(ExporterBase):
             raise ValueError('Unsupported Engine')
 
     def _render(self, resume: Resume, path: str, language=None, options=None):
-        language = self.get_language_data(language or resume.language)
-        resume_dict = resume.dict
-
-        extra = self.get_extra_data(self.EXT)
         options = options or {}
+        additional_paths = [Path(p) for p in options.pop('static', [])]
+        language = self.get_language_data(language or resume.language)
+        extra = self.get_extra_data(self.EXT)
+        resume_dict = resume.dict
 
         for img_key, img_path in self.config.get('image_b64', {}).items():
             img_path = self.theme_path / img_path
@@ -80,7 +80,7 @@ class HtmlExporter(ExporterBase):
             target_path = target_path / self.config.get('default_name', 'index.html')
 
         target_path.parent.mkdir(exist_ok=True)
-        for file in self.static_files:
+        for file in self.static_files + additional_paths:
             if file.is_dir():
                 shutil.copytree(str(file), str(target_path.parent / file.name))
             else:

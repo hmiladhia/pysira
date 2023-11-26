@@ -1,12 +1,19 @@
 \BLOCK{- if basics -}
 \name{\VAR{basics.name}}
 \tagline{\VAR{basics.label}}
-%% You can add multiple photos on the left or right
-\photoR{\VAR{ options.photo_size }}{\VAR{basics.image}}
-%\photoL{2cm}{Yacht_High,Suitcase_High}
+\BLOCK{- if not options.photo_is_right -}
+\BLOCK{ set photo_side = "L" }
+\BLOCK{ set image_side = "R" }
+\BLOCK{- else -}
+\BLOCK{ set photo_side = "R" }
+\BLOCK{ set image_side = "L" }
+\BLOCK{- endif }
+\photo\VAR{photo_side}{\VAR{ options.photo_size }}{\VAR{basics.image}}
+\BLOCK{ if options.secondary_image.path }
+\photo\VAR{image_side}{\VAR{ options.secondary_image.size | default("2cm") }}{\VAR{ options.secondary_image.path }}
+\BLOCK{ endif }
+
 \personalinfo{%
-  % Not all of these are required!
-  % You can add your own with \printinfo{symbol}{detail}
   \BLOCK{ if basics.email }\email{\VAR{basics.email}}\BLOCK{ endif }
   \BLOCK{ if basics.phone }\phone{\VAR{basics.phone}}\BLOCK{ endif }
   \BLOCK{ if basics.location }\location{\VAR{[basics.location.address, basics.location.postalCode, basics.location.city, utils.get_country_name(basics.location.countryCode)] | select('defined') | join(', ')}}\BLOCK{ endif }
@@ -17,9 +24,5 @@
   \BLOCK{ endfor }
 
   % \printinfo{\faPaw}{Hey ho!}
-  %% Or you can declare your own field with
-  % \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
-  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
-  % \gitlab{your_id}
 }
 \BLOCK{ endif -}

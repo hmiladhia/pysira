@@ -14,6 +14,11 @@
     "bottom": "1.5cm",
     "columnsep": "1.25cm",
     "photo_size": "3.5cm",
+    "photo_is_right": true,
+    "secondary_image": {
+      "path": null,
+      "size": "2cm"
+    },
     "custom_colors": {
       "DarkGreen": "#303d36",
       "MyGreen": "#88A05B"

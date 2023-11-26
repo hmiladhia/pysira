@@ -96,13 +96,15 @@ class LatexExporter(ExporterBase):
         language: str = None,
         options: dict[str, Any] = None,
     ):
+        options = options or {}
+        additional_paths = [Path(p) for p in options.pop('static', [])]
         language = self.get_language_data(language or resume.language)
         extra = self.get_extra_data(self.EXT)
         resume_dict = resume.dict
 
-        image_path = resume_dict.get('basics', {}).get('image_path', [])
+        image_path = resume_dict.get('basics', {}).get('image_path')
         if image_path:
-            image_path = [Path(image_path)]
+            additional_paths.append(Path(image_path))
 
         # Create Path
         target_path = Path(path)
@@ -110,7 +112,7 @@ class LatexExporter(ExporterBase):
             target_path = target_path / self.config.get('default_name', 'main.tex')
 
         target_path.parent.mkdir(exist_ok=True)
-        for file in self.static_files + image_path:
+        for file in self.static_files + additional_paths:
             if file.is_dir():
                 shutil.copytree(str(file), str(target_path.parent / file.name))
             else:
