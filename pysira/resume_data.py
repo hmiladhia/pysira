@@ -230,6 +230,7 @@ class Publication:
     summary: str
     releaseDate: str
     url: str
+    type: str
 
     @staticmethod
     def from_dict(obj: Any) -> Publication:
@@ -238,7 +239,8 @@ class Publication:
         _summary = obj.get('summary')
         _releaseDate = obj.get('releaseDate')
         _url = obj.get('url')
-        return Publication(_name, _publisher, _summary, _releaseDate, _url)
+        _type = obj.get('type', 'book')
+        return Publication(_name, _publisher, _summary, _releaseDate, _url, _type)
 
 
 @dataclass
