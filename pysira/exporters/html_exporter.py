@@ -7,7 +7,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from pysira import TEMPLATES_DIR
-from pysira.exporters.common import parse_date
+from pysira.exporters.common import append, parse_date
 from pysira.exporters.exporter_base import ExporterBase
 from pysira.json_resume import Resume
 
@@ -21,6 +21,7 @@ class HtmlExporter(ExporterBase):
         self.static_files = [self.theme_path / p for p in self.config.get('static', [])]
 
         template_path = config.get('template', 'index.html')
+        secondary_templates_paths = config.get('secondary_templates', [])
 
         env = Environment(
             loader=FileSystemLoader(
@@ -30,8 +31,12 @@ class HtmlExporter(ExporterBase):
         )
 
         env.filters['parse_date'] = parse_date
+        env.filters['append'] = append
 
         self.template = env.get_template(template_path)
+        self.secondary_templates = {
+            path: env.get_template(path) for path in secondary_templates_paths
+        }
 
     def render(self, resume: Resume, path: str, format, language=None, options=None):
         effective_options = self.config.get('default_options', {}).copy()
@@ -88,10 +93,16 @@ class HtmlExporter(ExporterBase):
 
         if options.get('update_assets_url', False):
             resume_dict.setdefault('meta', {})['assets_url'] = str(target_path.parent)
+
         html = self.template.render(
-            **resume_dict, language=language, extra=extra, options=options
+            **resume_dict, language=language, options=options, extra=extra
         )
         target_path.write_text(html)
+        for path, template in self.secondary_templates.items():
+            html = template.render(
+                **resume_dict, language=language, options=options, extra=extra
+            )
+            target_path.parent.joinpath(path).write_text(html)
 
     def _render_pyppdf(self, resume, path, language, options):
         from pyppdf import save_pdf

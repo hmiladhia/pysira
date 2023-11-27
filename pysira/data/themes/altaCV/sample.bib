@@ -1,0 +1,26 @@
+\BLOCK{- import 'date_macros.tex' as dates with context -}
+\BLOCK{ for pub in publications -}
+\BLOCK{ if pub.get('type', 'book').lower() in ("online", "medium") }
+@ONLINE{\VAR{ pub.name.lower().replace(' ', '-').replace("'", "") },
+  AUTHOR = {\VAR{ basics.name }},
+  TITLE = {\VAR{ pub.name }},
+  URL = {\VAR{ pub.url }},
+  YEAR = {\VAR{ dates.get_year(pub.releaseDate) }},
+}
+\BLOCK{ elif pub.get('type', 'book').lower() in ("article",) }
+@ARTICLE{\VAR{ pub.name.lower().replace(' ', '-').replace("'", "").split('-')[0] },
+  URL = {\VAR{ pub.url }},
+  AUTHOR = {\VAR{ basics.name }},
+  TITLE = {\VAR{ pub.name }},
+  YEAR = {\VAR{ dates.get_year(pub.releaseDate) }},
+  JOURNAL = {\VAR{ pub.publisher }},
+}
+\BLOCK{ else }
+@BOOK{\VAR{ pub.name.lower().replace(' ', '-').replace("'", "") },
+	AUTHOR = {\VAR{ basics.name }},
+	TITLE = {\VAR{ pub.name }},
+	YEAR = {\VAR{ dates.get_year(pub.releaseDate) }},
+	PUBLISHER = {\VAR{ pub.publisher }},
+}
+\BLOCK{ endif }
+\BLOCK{- endfor }

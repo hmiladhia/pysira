@@ -13,7 +13,8 @@
         "references": "References",
         "volunteer": "Volunteer",
         "contact": "Contact",
-        "profiles": "Profiles"
+        "profiles": "Profiles",
+        "publications": "Publications"
     },
     "months": [
         "January",
@@ -64,6 +65,12 @@
         "advanced": 5,
         "mastery": 6,
         "native": 6
+    },
+    "publication_types": {
+        "book": "Books",
+        "article": "Articles",
+        "medium": "Medium Articles",
+        "online": "Blog Posts"
     },
     "countries": {
         "AF": "Afghanistan",

@@ -11,7 +11,7 @@ from typing import Any
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from pysira import TEMPLATES_DIR
-from pysira.exporters.common import parse_date
+from pysira.exporters.common import append, parse_date
 from pysira.exporters.exporter_base import ExporterBase
 from pysira.json_resume import Resume
 
@@ -43,6 +43,7 @@ class LatexExporter(ExporterBase):
         self.static_files = [self.theme_path / p for p in self.config.get('static', [])]
 
         template_path = config.get('template', 'main.tex')
+        secondary_templates_paths = config.get('secondary_templates', [])
 
         env = Environment(
             block_start_string=r'\BLOCK{',
@@ -61,8 +62,12 @@ class LatexExporter(ExporterBase):
         env.filters['regex_replace'] = regex_replace
         env.filters['escape'] = tex_escape
         env.filters['parse_date'] = parse_date
+        env.filters['append'] = append
 
         self.template = env.get_template(template_path)
+        self.secondary_templates = {
+            path: env.get_template(path) for path in secondary_templates_paths
+        }
 
     def render(
         self, resume: Resume, path: str, format: str, language=None, options=None
@@ -80,11 +85,16 @@ class LatexExporter(ExporterBase):
 
         with tempfile.TemporaryDirectory() as temp_dir:
             tex_file = Path(temp_dir) / 'main.tex'
+            params = dict(cwd=temp_dir, stdout=PIPE, timeout=15)
+
             self._render(resume, str(tex_file), language, options=effective_options)
 
-            subprocess.run(
-                ['pdflatex', str(tex_file)], cwd=temp_dir, stdout=PIPE, timeout=15
-            )
+            subprocess.run(['pdflatex', str(tex_file)], **params)
+            if resume.resume.publications:
+                subprocess.run(['biber', tex_file.stem], **params)
+                subprocess.run(['pdflatex', str(tex_file)], **params)
+                subprocess.run(['pdflatex', str(tex_file)], **params)
+
             pdf = (Path(temp_dir) / f'{tex_file.stem}.pdf').read_bytes()
 
             Path(path).write_bytes(pdf)
@@ -122,6 +132,12 @@ class LatexExporter(ExporterBase):
             **resume_dict, language=language, options=options, extra=extra
         )
         target_path.write_text(latex)
+
+        for path, template in self.secondary_templates.items():
+            latex = template.render(
+                **resume_dict, language=language, options=options, extra=extra
+            )
+            target_path.parent.joinpath(path).write_text(latex)
 
 
 # Custom filter methods

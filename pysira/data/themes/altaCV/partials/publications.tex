@@ -2,9 +2,28 @@
 \cvsection{\VAR{ language.titles.publications }}
 
 \nocite{*}
-% TODO: bib file as template
+\BLOCK{ set context = namespace(pub_types=[]) }
 \BLOCK{ for pub in publications }
-\printbibliography[heading=pubtype,title={\printinfo{\faBook}{\VAR{ pub.name }}},type=book]
+\BLOCK{ set context.pub_types = context.pub_types|append(pub.type, True) }
+\BLOCK{ endfor }
+
+\BLOCK{ for pub_type in context.pub_types -}
+
+\BLOCK{- set icon = "\\faBook" -}
+\BLOCK{- set pub_type = pub_type|default('book') -}
+\BLOCK{- set pub_type = pub_type.lower() -}
+\BLOCK{- set pub_title = language.publication_types.get(pub_type, pub_type).title() -}
+
+\BLOCK{- if pub_type == 'article' -}
+\BLOCK{ set icon = "\\faFile*[regular]"}
+
+\BLOCK{ elif pub_type == 'medium'}
+\BLOCK{ set icon = "\\faMedium"}
+\BLOCK{- set pub_type = 'online' -}
+\BLOCK{ elif pub_type == 'inproceedings'}
+\BLOCK{ set icon = "\\faUsers"}
+\BLOCK{- endif -}
+\printbibliography[heading=pubtype,title={\printinfo{\VAR{icon}}{\VAR{ pub_title }}},type=\VAR{pub_type}]
 
 \BLOCK{ if options.compact }
 \VAR{ "\divider\smallskip" if not loop.last else "" }
@@ -12,9 +31,5 @@
 \VAR{ "\divider" if not loop.last else "" }
 \BLOCK{endif}
 \BLOCK{ endfor }
-
-% \printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
-% \printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Journal Articles}}, type=article]
-% \printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Conference Proceedings}},type=inproceedings]
 
 \BLOCK{ endif }

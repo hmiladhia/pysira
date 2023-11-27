@@ -13,7 +13,8 @@
         "references": "Références",
         "volunteer": "Volontariat",
         "contact": "Coordonnées",
-        "profiles": "Profils"
+        "profiles": "Profils",
+        "publications": "Publications"
     },
     "months": [
         "Janvier",
@@ -40,10 +41,6 @@
         "grade": "Note",
         "courses": "Cours",
         "results": "Résultats"
-
-    },
-    "countries": {
-        "FR": "France"
     },
     "level": {
         "debutant": 1,
@@ -66,5 +63,14 @@
         "independant ": 4,
         "avance": 5,
         "maitrise": 6
+    },
+    "publication_types": {
+        "book": "Livres",
+        "article": "Articles",
+        "medium": " Articles Medium",
+        "online": "Articles de blog"
+    },
+    "countries": {
+        "FR": "France"
     }
 }

@@ -1,7 +1,8 @@
 {
   "name": "altaCV",
   "markup": "latex",
-  "entry": "main.tex",
+  "template": "main.tex",
+  "secondary_templates": ["sample.bib"],
   "static": ["altacv.cls"],
   "default_options": {
     "compact": true,
