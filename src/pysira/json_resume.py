@@ -10,26 +10,26 @@ from pathlib import Path
 from pysira.resume_data import ResumeData
 
 
-def _dict_factory(d):
+def _dict_factory(d: dict) -> dict:
     return {k: v for k, v in dict(d).items() if v is not None}
 
 
 class Resume:
-    def __init__(self, resume: ResumeData, path=None):
+    def __init__(self, resume: ResumeData, path: str | Path | None = None):
         self.resume = resume
-        self.path = Path(path or '.').resolve()
+        self.path = Path(path or ".").resolve()
         self._set_image_extra()
 
     @property
-    def dict(self):
+    def dict(self) -> dict:
         return asdict(self.resume, dict_factory=_dict_factory)
 
     @property
-    def language(self):
+    def language(self) -> str:
         return self.resume.meta.language
 
     @staticmethod
-    def from_json(path, encoding=None):
+    def from_json(path: str | Path, encoding: str | None = None) -> Resume:
         resume_path = Path(path)
         json_content = resume_path.read_text(encoding=encoding)
 
@@ -38,7 +38,7 @@ class Resume:
         return Resume(resume, resume_path.parent)
 
     @staticmethod
-    def from_yaml(path, encoding=None):
+    def from_yaml(path: str | Path, encoding: str | None = None) -> Resume:
         import yaml
 
         resume_path = Path(path)
@@ -48,7 +48,7 @@ class Resume:
 
         return Resume(resume, resume_path.parent)
 
-    def _set_image_extra(self):
+    def _set_image_extra(self) -> None:
         if self.resume.basics.image is None:
             return
 
@@ -59,13 +59,18 @@ class Resume:
 
         self.resume.basics.image_path = str(image_path)
         self.resume.basics.image_b64 = base64.b64encode(image_path.read_bytes()).decode(
-            'ascii'
+            "ascii"
         )
         self.resume.basics.image_b64_mime_type = guess_type(str(image_path))[0]
 
     def abbreviate(
-        self, work=None, projects=None, skills=None, certificates=None, summary=True
-    ):
+        self,
+        work: int | None = None,
+        projects: int | None = None,
+        skills: int | None = None,
+        certificates: int | None = None,
+        summary: bool = True,
+    ) -> Resume:
         resume = deepcopy(self.resume)
 
         if not summary:
