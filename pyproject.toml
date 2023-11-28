@@ -1,20 +1,90 @@
 [build-system]
-requires = ["setuptools>=42.0", "wheel"]
+requires = ["setuptools>=62.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysira"
+authors = [
+    {name = "Dhia Hmila", email = "dhiahmila@gmail.com"},
+]
+description = "CLI tool to handle json resume format in python"
+dependencies = [
+    "PyYAML>=6.0",
+    "Jinja2>=3.0.0",
+    "click>=7.1",
+    'importlib-metadata; python_version<"3.8"',
+]
+license = {text = "MIT"}
+dynamic = ["version", "readme"]
+keywords=["resume", "json", "cli", "jsonresume"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+pdfkit = ['pdfkit>=0.6.1']
+xhtml2pdf = ['xhtml2pdf>=0.2.9']
+pyppdf = ['pyppdf>=0.1.2']
+
+[project.scripts]
+sira = "pysira.__main__:cli"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "pysira.__version__"}
+readme = {file = ["README.md"]}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pysira*"]
 
 [tool.pytest.ini_options]
 testpaths = [
     "tests",
 ]
 
+
 [tool.black]
 line-length = 88
 target-version = ['py38']
-skip-string-normalization = true
+
 
 [tool.isort]
 line_length = 88
 profile = "black"
 
-# [tool.mypy]
-# exclude = []
+
+[tool.ruff]
+select = [
+    'A', 'B', 'C', 'D4', 'E', 'F', 'G', 'N', 'S', 'Q', # D
+    'NPY', 'DTZ', 'RUF', 'PT', 'PL', 'FA', 'SIM', 'UP',
+    'ICN', 'PIE', 'PYI', 'TID', 'YTT', 'ANN', 'BLE',
+]
+ignore = ["A003", "ANN101", "ANN102", "ANN204", "ANN401"]
+
+include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
+line-length = 100
+target-version = "py38"
+
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = ["S101"]
+"__main__.py" = ["PLR0913"]
+"resume_data.py" = ["N815"]
+"tex_exporter.py" = ["S603"]
+
+[tool.ruff.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pylint]
+max-args = 6
