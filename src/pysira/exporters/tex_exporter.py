@@ -7,13 +7,16 @@ import subprocess
 import tempfile
 from pathlib import Path
 from subprocess import PIPE
+from typing import TYPE_CHECKING
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from pysira import TEMPLATES_DIR
 from pysira.exporters.common import append, parse_date
 from pysira.exporters.exporter_base import ExporterBase
-from pysira.json_resume import Resume
+
+if TYPE_CHECKING:
+    from pysira.json_resume import Resume
 
 _CONV = {
     "&": r"\&",
@@ -144,11 +147,11 @@ class LatexExporter(ExporterBase):
         )
         target_path.write_text(latex)
 
-        for path, template in self.secondary_templates.items():
+        for sec_path, template in self.secondary_templates.items():
             latex = template.render(
                 **resume_dict, language=language, options=options, extra=extra
             )
-            target_path.parent.joinpath(path).write_text(latex)
+            target_path.parent.joinpath(sec_path).write_text(latex)
 
 
 # Custom filter methods
@@ -158,6 +161,8 @@ def regex_replace(s: str, find: str, replace: str) -> str:
 
 def tex_escape(text: str) -> str:
     """
+    Escape special characters.
+
     :param text: a plain text message
     :return: the message escaped to appear correctly in LaTeX
     """

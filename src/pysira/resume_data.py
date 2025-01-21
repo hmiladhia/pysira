@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
 
 
 @dataclass
@@ -12,7 +11,7 @@ class Award:
     date: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Award:
+    def from_dict(obj: dict[str]) -> Award:
         _title = obj.get("title")
         _awarder = obj.get("awarder")
         _summary = obj.get("summary")
@@ -27,7 +26,7 @@ class Profile:
     username: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Profile:
+    def from_dict(obj: dict[str]) -> Profile:
         _network = obj.get("network")
         _url = obj.get("url")
         _username = obj.get("username")
@@ -42,7 +41,7 @@ class Location:
     region: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Location:
+    def from_dict(obj: dict[str]) -> Location:
         _postal_code = obj.get("postalCode")
         _city = obj.get("city")
         _country_code = obj.get("countryCode")
@@ -68,7 +67,7 @@ class Basics:
     image_b64_mime_type: str = None
 
     @staticmethod
-    def from_dict(obj: Any) -> Basics:
+    def from_dict(obj: dict[str]) -> Basics:
         _name = obj.get("name")
         _label = obj.get("label")
         _image = obj.get("image")
@@ -101,7 +100,7 @@ class Certificate:
     issuer: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Certificate:
+    def from_dict(obj: dict[str]) -> Certificate:
         _name = obj.get("name")
         _date = obj.get("date")
         _url = obj.get("url")
@@ -121,7 +120,7 @@ class Education:
     endDate: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Education:
+    def from_dict(obj: dict[str]) -> Education:
         _institution = obj.get("institution")
         _url = obj.get("url")
         _area = obj.get("area")
@@ -149,7 +148,7 @@ class Interest:
     keywords: list[str]
 
     @staticmethod
-    def from_dict(obj: Any) -> Interest:
+    def from_dict(obj: dict[str]) -> Interest:
         _name = obj.get("name")
         _keywords = obj.get("keywords", [])
         return Interest(_name, _keywords)
@@ -161,7 +160,7 @@ class Language:
     fluency: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Language:
+    def from_dict(obj: dict[str]) -> Language:
         _language = obj.get("language")
         _fluency = obj.get("fluency")
         return Language(_language, _fluency)
@@ -175,7 +174,7 @@ class Meta:
     language: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Meta:
+    def from_dict(obj: dict[str]) -> Meta:
         _canonical = obj.get("canonical")
         _version = obj.get("version")
         _last_modified = obj.get("lastModified")
@@ -197,7 +196,7 @@ class Project:
     endDate: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Project:
+    def from_dict(obj: dict[str]) -> Project:
         _name = obj.get("name")
         _description = obj.get("description")
         _highlights = obj.get("highlights", [])
@@ -233,7 +232,7 @@ class Publication:
     type: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Publication:
+    def from_dict(obj: dict[str]) -> Publication:
         _name = obj.get("name")
         _publisher = obj.get("publisher")
         _summary = obj.get("summary")
@@ -249,7 +248,7 @@ class Reference:
     name: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Reference:
+    def from_dict(obj: dict[str]) -> Reference:
         _reference = obj.get("reference")
         _name = obj.get("name")
         return Reference(_reference, _name)
@@ -262,7 +261,7 @@ class Skill:
     keywords: list[str]
 
     @staticmethod
-    def from_dict(obj: Any) -> Skill:
+    def from_dict(obj: dict[str]) -> Skill:
         _name = obj.get("name")
         _level = obj.get("level")
         _keywords = obj.get("keywords", [])
@@ -280,7 +279,7 @@ class Volunteer:
     endDate: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Volunteer:
+    def from_dict(obj: dict[str]) -> Volunteer:
         _organization = obj.get("organization")
         _position = obj.get("position")
         _url = obj.get("url")
@@ -312,7 +311,7 @@ class Work:
     endDate: str
 
     @staticmethod
-    def from_dict(obj: Any) -> Work:
+    def from_dict(obj: dict[str]) -> Work:
         _summary = obj.get("summary")
         _name = obj.get("name")
         _website = obj.get("website")
@@ -355,7 +354,7 @@ class ResumeData:
 
     @staticmethod
     def from_dict(obj: dict[str]) -> ResumeData:
-        _schema = obj.get("$schema", None)
+        _schema = obj.get("$schema")
         _basics = Basics.from_dict(obj.get("basics"))
         _work = [Work.from_dict(y) for y in obj.get("work", [])]
         _volunteer = [Volunteer.from_dict(y) for y in obj.get("volunteer", [])]

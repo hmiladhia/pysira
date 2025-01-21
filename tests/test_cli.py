@@ -12,12 +12,12 @@ example_options = (Path(__file__).parents[1] / "examples/altacv_options.json").r
 TEX_FILES_LEN = 3
 
 
-@pytest.fixture()
+@pytest.fixture
 def runner() -> CliRunner:
     return CliRunner()
 
 
-@pytest.fixture()
+@pytest.fixture
 def tmpdir() -> str:
     with TemporaryDirectory() as tmpdir:
         yield tmpdir
