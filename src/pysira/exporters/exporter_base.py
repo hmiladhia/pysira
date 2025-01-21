@@ -16,16 +16,6 @@ class ExporterBase(ABC):
         language_path = LANGUAGE_DIR / f"{language}.json"
         return json.loads(language_path.read_text())
 
-    @abstractmethod
-    def render(
-        self,
-        resume: Resume,
-        path: str,
-        format_: str,
-        language: str | None = None,
-        options: dict[str] | None = None,
-    ) -> None: ...
-
     @staticmethod
     def get_extra_data(type_: str) -> dict:
         extra_path = EXTRA_DIR / type_
@@ -41,3 +31,13 @@ class ExporterBase(ABC):
             current_ctx.update(json.loads(file.read_text()))
 
         return extra
+
+    @abstractmethod
+    def render(
+        self,
+        resume: Resume,
+        path: str,
+        format_: str,
+        language: str | None = None,
+        options: dict[str] | None = None,
+    ) -> None: ...
