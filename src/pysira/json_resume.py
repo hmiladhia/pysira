@@ -15,7 +15,7 @@ def _dict_factory(d: dict) -> dict:
 
 
 class Resume:
-    def __init__(self, resume: ResumeData, path: str | Path | None = None):
+    def __init__(self, resume: ResumeData, path: str | Path | None = None) -> None:
         self.resume = resume
         self.path = Path(path or ".").resolve()
         self._set_image_extra()

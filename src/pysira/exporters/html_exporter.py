@@ -5,19 +5,22 @@ import shutil
 import tempfile
 from mimetypes import guess_type
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from pysira import TEMPLATES_DIR
 from pysira.exporters.common import append, parse_date
 from pysira.exporters.exporter_base import ExporterBase
-from pysira.json_resume import Resume
+
+if TYPE_CHECKING:
+    from pysira.json_resume import Resume
 
 
 class HtmlExporter(ExporterBase):
     EXT = "html"
 
-    def __init__(self, config: dict[str], template_path: str = "index.html"):
+    def __init__(self, config: dict[str], template_path: str = "index.html") -> None:
         self.config = config
         self.theme_path = Path(config["theme_path"]).resolve()
         self.static_files = [self.theme_path / p for p in self.config.get("static", [])]
@@ -74,7 +77,7 @@ class HtmlExporter(ExporterBase):
         else:
             raise ValueError("Unsupported Engine")
 
-    def _render(
+    def _render(  # noqa: C901
         self,
         resume: Resume,
         path: str | Path,
@@ -113,11 +116,11 @@ class HtmlExporter(ExporterBase):
             **resume_dict, language=language, options=options, extra=extra
         )
         target_path.write_text(html)
-        for path, template in self.secondary_templates.items():
+        for sec_path, template in self.secondary_templates.items():
             html = template.render(
                 **resume_dict, language=language, options=options, extra=extra
             )
-            target_path.parent.joinpath(path).write_text(html)
+            target_path.parent.joinpath(sec_path).write_text(html)
 
     def _render_pyppdf(
         self,
@@ -159,10 +162,10 @@ class HtmlExporter(ExporterBase):
             self._render(resume, str(html_file), language, options)
 
             # convert HTML to PDF
-            with open(path, "w+b") as output_path:
+            with Path(path).open("w+b") as output_path:
                 pisa.CreatePDF(
                     html_file.read_text(),  # the HTML to convert
-                    dest=output_path,  # file handle to recieve result
+                    dest=output_path,  # file handle to receive result
                     xhtml=False,
                     encoding="utf-8",
                 )

@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import json
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
 from pysira import EXTRA_DIR, LANGUAGE_DIR
-from pysira.json_resume import Resume
+
+if TYPE_CHECKING:
+    from pysira.json_resume import Resume
 
 
 class ExporterBase(ABC):
@@ -21,8 +24,7 @@ class ExporterBase(ABC):
         format_: str,
         language: str | None = None,
         options: dict[str] | None = None,
-    ) -> None:
-        ...
+    ) -> None: ...
 
     @staticmethod
     def get_extra_data(type_: str) -> dict:

@@ -1,7 +1,3 @@
-[build-system]
-requires = ["setuptools>=62.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "pysira"
 authors = [
@@ -20,11 +16,10 @@ keywords=["resume", "json", "cli", "jsonresume"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
@@ -34,57 +29,141 @@ pdfkit = ['pdfkit>=0.6.1']
 xhtml2pdf = ['xhtml2pdf>=0.2.9']
 pyppdf = ['pyppdf>=0.1.2']
 
+
 [project.scripts]
 sira = "pysira.__main__:cli"
 
-[tool.setuptools]
-include-package-data = true
-
-[tool.setuptools.dynamic]
-version = {attr = "pysira.__version__"}
-readme = {file = ["README.md"]}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["pysira*"]
-
-[tool.pytest.ini_options]
-testpaths = [
-    "tests",
-]
-
-
-[tool.black]
-line-length = 88
-target-version = ['py38']
-
-
-[tool.isort]
-line_length = 88
-profile = "black"
-
+[project.urls]
+Repository = "https://github.com/hmiladhia/pysira"
+Issues = "https://github.com/hmiladhia/pysira/issues"
 
 [tool.ruff]
+target-version = "py39"
+
+[tool.ruff.lint]
 select = [
-    'A', 'B', 'C', 'D4', 'E', 'F', 'G', 'N', 'S', 'Q', # D
-    'NPY', 'DTZ', 'RUF', 'PT', 'PL', 'FA', 'SIM', 'UP',
-    'ICN', 'PIE', 'PYI', 'TID', 'YTT', 'ANN', 'BLE',
+  "A", # flake8-builtins
+  "B", # flake8-bugbear
+  "E", # pycodestyle - Error
+  "W", # pycodestyle - Warning
+  "F", # Pyflakes
+  "N", # pep8-naming
+  "S", # flake8-bandit
+  "RUF", # Ruff-specific rules
+  "PLC", # Pylint Convention
+  "PLE", # Pylint Error
+  "PLW", # Pylint Warning
+  "PLR", # Pylint Refactor
+  "Q", # flake8-quotes
 ]
-ignore = ["A003", "ANN101", "ANN102", "ANN204", "ANN401"]
+extend-select = [
+    "ARG", # flake8-unused-arguments
+    "ASYNC", # flake8-async
+    "BLE", # flake8-blind-except
+    "C4", # flake8-comprehensions
+    "C90", # mccabe (complexity)
+    "FA", # flake8-future-annotations
+    "ISC", # flake8-implicit-str-concat
+    "PIE", # flake8-pie ( misc lints )
+    "PERF", # Perflint
+    "PTH", # flake8-use-pathlib
+    "SIM", # flake8-simplify
+    "SLOT", # flake8-slots
+    "TD", # flake8-todos (EXCLUDE TD002)
+    "TID", # flake8-tidy-imports
+    "UP", # pyupgrade
+    "RSE", # flake8-raise (RSE)
 
-include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
-line-length = 100
-target-version = "py38"
+    # Typing
+    "ANN", # flake8-annotations
+    "PYI", # flake8-pyi
+    "TCH", # flake8-type-checking
 
+    # Documentation
+    "D", # pydocstyle
+    # "DOC", # pydoclint # Preview
+
+    # Tool Specific
+    # "FAST", # FastAPI  # Preview
+    "NPY", # NumPy-specific rules
+    "PD", # pandas-vet
+    "ICN", # flake8-import-conventions
+    "PT" # flake8-pytest-style ( Only use in tests )
+]
+extend-ignore = [
+  "ANN101", # flake8-annotations - missing-type-self
+  "D1", # pydocstyle - missing-docstring
+  "D203", # pydocstyle - one-blank-line-before-class
+  "D212", # multi-line-summary-first-line
+  "ISC001", # flake8-implicit-str-concat - single-line-implicit-string-concatenation
+  "TD002", # flake8-todos - missing-todo-author
+]
 
 [tool.ruff.lint.per-file-ignores]
-"test_*.py" = ["S101"]
+"tests/**.py" = ["S101", "ANN201"]
 "__main__.py" = ["PLR0913"]
 "resume_data.py" = ["N815"]
 "tex_exporter.py" = ["S603"]
 
-[tool.ruff.mccabe]
-max-complexity = 8
+"!tests/**.py" = ["PT"]
 
-[tool.ruff.lint.pylint]
-max-args = 6
+[tool.ruff.lint.pycodestyle]
+max-line-length = 100
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 6
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/pysira/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pysira"]
+sources = ["src"]
+
+
+[tool.tox]
+min_version = "4"
+requires = ["tox>=4.19", "tox-uv>=1"]
+env_list = ["format", "lint", "3.13", "3.12", "3.11", "3.10", "3.9"]
+
+# This is a workaround
+# See Issue: https://github.com/ymyzk/tox-gh-actions/issues/198
+[tool.tox.gh-actions]
+python = """
+	3.9: py39
+	3.10: py310
+	3.11: py311
+	3.12: py312
+	3.13: py313
+	"""
+
+[tool.tox.env_run_base]
+description = "run unit tests"
+deps = [
+    "pytest>=8",
+    "pytest-sugar"
+]
+commands = [["pytest", { replace = "posargs", default = ["tests"], extend = true }]]
+
+[tool.tox.env.format]
+description = "run formatter"
+skip_install = true
+deps = ["ruff"]
+commands = [["ruff", "format", { replace = "posargs", default = ["."], extend = true} ]]
+
+[tool.tox.env.lint]
+description = "run linters"
+skip_install = true
+deps = ["ruff"]
+commands = [["ruff", "check", { replace = "posargs", default = ["."], extend = true} ]]
+
+
+[tool.codespell]
+skip = '*/fontawesome.json,*/fr.json,tests/*'
+ignore-words-list = "Nam,FO"
+quiet-level = 3

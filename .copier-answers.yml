@@ -1,0 +1,13 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v0.1
+_src_path: https://github.com/hmiladhia/package-template.git
+author: Dhia Hmila
+distribution_name: pysira
+organisation: hmiladhia
+package_name: pysira
+project_name: pysira
+project_version: 0.1.0
+use_mypy: false
+use_precommit: true
+use_tox: true
+use_uv: true
