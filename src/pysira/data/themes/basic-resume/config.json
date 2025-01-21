@@ -1,0 +1,39 @@
+{
+  "name": "basic-resume",
+  "markup": "typst",
+  "template": "main.typ",
+  "static": [],
+
+  "default_options": {
+    "margins": {
+      "left": "1.25cm",
+      "right": "1.25cm",
+      "top": "1.5cm",
+      "bottom": "1.5cm"
+    },
+
+    "normalphoto": false,
+    "photo_size": "3.5cm",
+    "photo_is_right": true,
+    "secondary_image": {
+      "path": null,
+      "size": "2cm"
+    },
+
+
+    "custom_colors": {
+      "DarkGreen": "#303d36",
+      "MyGreen": "#88A05B"
+    },
+    "colors": {
+      "name": "black",
+      "tagline": "teal",
+      "heading": "teal",
+      "headingrule": "teal",
+      "subheading": "DarkGreen",
+      "accent": "teal",
+      "emphasis": "SlateGrey",
+      "body": "LightGrey"
+    }
+  }
+}

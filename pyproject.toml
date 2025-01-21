@@ -5,10 +5,11 @@ authors = [
 ]
 description = "CLI tool to handle json resume format in python"
 dependencies = [
-    "PyYAML>=6.0",
+    "pyyaml>=6.0",
     "Jinja2>=3.0.0",
     "click>=7.1",
     'importlib-metadata; python_version<"3.8"',
+    "typst>=0.12.2",
 ]
 license = {text = "MIT"}
 dynamic = ["version", "readme"]

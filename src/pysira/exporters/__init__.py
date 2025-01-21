@@ -4,6 +4,7 @@ from pysira import THEMES_DIR
 from pysira.exporters.exporter_base import ExporterBase
 from pysira.exporters.html_exporter import HtmlExporter
 from pysira.exporters.tex_exporter import LatexExporter
+from pysira.exporters.typst_exporter import TypstExporter
 
 
 class ExportFactory:
@@ -21,5 +22,8 @@ class ExportFactory:
 
         if markup == "latex":
             return LatexExporter(self.config)
+
+        if markup == "typst":
+            return TypstExporter(self.config)
 
         raise ValueError("Unsupported Markup")
