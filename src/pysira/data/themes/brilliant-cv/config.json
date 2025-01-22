@@ -1,0 +1,40 @@
+{
+  "name": "brilliant-cv",
+  "markup": "typst",
+  "template": "main.typ",
+  "secondary_templates": [
+    "static/publications.bib"
+  ],
+  "static": [
+    "static/avatar.jpg"
+  ],
+  "default_options": {
+    "awesome_color": "#109EAA",
+    "before_section_skip": "1pt",
+    "before_entry_skip": "1pt",
+    "before_entry_description_skip": "1pt",
+    "paper_size": "a4",
+    "footer": "",
+    "sections": [
+      "work",
+      "education",
+      "projects",
+      "publications",
+      "skills",
+      "certificates"
+    ],
+    "regular_fonts": [
+      "New Computer Modern",
+      "New Computer Modern"
+    ],
+    "header_font": "New Computer Modern",
+    "header_align": "left",
+    "display_profile_photo": true,
+    "display_entry_society_first": true,
+    "display_tags_first": true,
+    "display_logo": false,
+    "inject_ai_prompt": true,
+    "inject_keywords": true,
+    "injected_keywords_list": []
+  }
+}

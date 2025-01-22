@@ -14,7 +14,9 @@ class ExporterBase(ABC):
     @staticmethod
     def get_language_data(language: str) -> dict[str]:
         language_path = LANGUAGE_DIR / f"{language}.json"
-        return json.loads(language_path.read_text())
+        lang = json.loads(language_path.read_text())
+        lang["id"] = language
+        return lang
 
     @staticmethod
     def get_extra_data(type_: str) -> dict:
