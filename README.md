@@ -9,6 +9,9 @@ CLI tool to export [jsonresume](https://jsonresume.org/) files to different form
 
 ```bash
 sira export -t stackoverflow examples/resume.json -o examples/out/stackoverflow
+
+# OR
+sira export -t brilliant-cv examples/resume.json -f pdf -o examples/out/
 ```
 
 ## Help
