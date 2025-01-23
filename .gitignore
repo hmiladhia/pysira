@@ -304,3 +304,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+# -- Custom Exclusions --
+!/**/data/themes/*/lib
