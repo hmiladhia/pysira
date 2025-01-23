@@ -435,7 +435,7 @@
   }
 
   table(
-    columns: (metadata.layout.at("skill", ().to-dict()).at("category_size", default: 20%), 1fr),
+    columns: (metadata.layout.at("skill", default: ().to-dict()).at("category_size", default: 20%), 1fr),
     inset: 5pt,
     column-gutter: 10pt,
     stroke: none,
