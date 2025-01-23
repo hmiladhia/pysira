@@ -15,6 +15,7 @@
     "before_entry_description_skip": "1pt",
     "paper_size": "a4",
     "footer": "",
+    "skill_category_size": "20%",
     "sections": [
       "work",
       "education",

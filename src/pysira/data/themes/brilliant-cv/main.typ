@@ -2,8 +2,13 @@
 
 #let include_partials(partial, lang: metadata.language) = {
   for module in partial {
-    include {
-      "partials/" + module + ".typ"
+    if module == "break" {
+      pagebreak()
+    }
+    else {
+      include {
+        "partials/" + module + ".typ"
+      }
     }
   }
 }
