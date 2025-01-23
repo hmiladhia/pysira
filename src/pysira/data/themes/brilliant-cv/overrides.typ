@@ -75,6 +75,9 @@
           display_tags_first: options.display_tags_first,
           display_logo: options.display_logo,
         ),
+        skill: (
+          category_size: options.skill_category_size
+        )
     ),
     inject: (
       inject_ai_prompt: options.inject_ai_prompt,

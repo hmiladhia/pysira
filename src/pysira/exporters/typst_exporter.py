@@ -92,4 +92,4 @@ def _export_yaml(path: Path | str, **dicts: dict) -> None:
     path = Path(path)
     for name, value in dicts.items():
         with path.joinpath(f"{name}.yaml").open("w") as f:
-            yaml.dump(value, f)
+            yaml.dump(value, f, encoding="utf-8")
