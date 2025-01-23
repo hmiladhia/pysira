@@ -136,4 +136,3 @@
 #let cvSection = cvSection.with(metadata: metadata)
 #let cvEntry = cvEntry.with(metadata: metadata)
 #let cvHonor = cvHonor.with(metadata: metadata)
-#let cvSkill = cvSkill.with(metadata: metadata)

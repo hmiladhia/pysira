@@ -29,7 +29,7 @@ class Resume:
         return self.resume.meta.language
 
     @staticmethod
-    def from_json(path: str | Path, encoding: str | None = None) -> Resume:
+    def from_json(path: str | Path, encoding: str | None = "utf-8") -> Resume:
         resume_path = Path(path)
         json_content = resume_path.read_text(encoding=encoding)
 
@@ -38,7 +38,7 @@ class Resume:
         return Resume(resume, resume_path.parent)
 
     @staticmethod
-    def from_yaml(path: str | Path, encoding: str | None = None) -> Resume:
+    def from_yaml(path: str | Path, encoding: str | None = "utf-8") -> Resume:
         import yaml
 
         resume_path = Path(path)
