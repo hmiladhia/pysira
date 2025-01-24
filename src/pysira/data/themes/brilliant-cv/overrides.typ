@@ -79,7 +79,8 @@
           display_logo: options.display_logo,
         ),
         skill: (
-          category_size: options.skill_category_size
+          category_size: options.skill_category_size,
+          spacing: options.skill_spacing
         )
     ),
     inject: (

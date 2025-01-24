@@ -433,16 +433,13 @@
   let skillInfoStyle(str) = {
     text(str)
   }
-
-  let category_size = eval(
-    metadata.at("layout", default: ().to-dict())
-    .at("skill", default: ().to-dict())
-    .at("category_size", default: "25%")
-  )
+  let skills_metadta=metadata.at("layout", default: ().to-dict()).at("skill", default: ().to-dict())
+  let category_size = eval(skills_metadta.at("category_size", default: "25%"))
+  let spacing = eval(skills_metadta.at("spacing", default: "5pt"))
 
   table(
     columns: (category_size, 1fr),
-    inset: 5pt,
+    inset: spacing,
     column-gutter: 10pt,
     stroke: none,
     align: horizon,
