@@ -426,7 +426,7 @@
 /// - type (str): The type of the skill. It is displayed on the left side.
 /// - info (str | content): The information about the skill. It is displayed on the right side. Items can be separated by `#hbar()`.
 /// -> content
-#let cvSkill(type: "Type", info: "Info") = {
+#let cvSkill(type: "Type", info: "Info", metadata: metadata) = {
   let skillTypeStyle(str) = {
     align(right, text(size: 10pt, weight: "bold", str))
   }
@@ -434,8 +434,14 @@
     text(str)
   }
 
+  let category_size = eval(
+    metadata.at("layout", default: ().to-dict())
+    .at("skill", default: ().to-dict())
+    .at("category_size", default: "25%")
+  )
+
   table(
-    columns: (1fr, 3fr),
+    columns: (category_size, 1fr),
     inset: 5pt,
     column-gutter: 10pt,
     stroke: none,
