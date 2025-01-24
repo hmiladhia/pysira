@@ -13,6 +13,7 @@
     "before_section_skip": "1pt",
     "before_entry_skip": "1pt",
     "before_entry_description_skip": "1pt",
+    "skill_category_size": "25%",
     "paper_size": "a4",
     "footer": "",
     "sections": [
