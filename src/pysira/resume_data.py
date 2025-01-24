@@ -116,6 +116,7 @@ class Education:
     studyType: str
     startDate: str
     score: str
+    location: str
     courses: list[str]
     endDate: str
 
@@ -126,6 +127,7 @@ class Education:
         _area = obj.get("area")
         _study_type = obj.get("studyType")
         _score = obj.get("score")
+        _location = obj.get("location")
         _courses = obj.get("courses", [])
 
         _start_date = obj.get("startDate")
@@ -137,6 +139,7 @@ class Education:
             _study_type,
             _start_date,
             _score,
+            _location,
             _courses,
             _end_date,
         )
@@ -307,6 +310,7 @@ class Work:
     position: str
     startDate: str
     highlights: list[str]
+    keywords: list[str]
     url: str
     endDate: str
 
@@ -318,6 +322,7 @@ class Work:
         _location = obj.get("location")
         _position = obj.get("position")
         _highlights = obj.get("highlights", [])
+        _keywords = obj.get("keywords", [])
         _url = obj.get("url")
 
         _start_date = obj.get("startDate")
@@ -330,6 +335,7 @@ class Work:
             _position,
             _start_date,
             _highlights,
+            _keywords,
             _url,
             _end_date,
         )
