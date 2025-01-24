@@ -19,7 +19,7 @@
       </ul>
       {% endif %}
       {% if interest.summary %}
-        <div class="summary">{{ interest.summary | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
+        <div class="summary">{{ interest.summary| markdown | safe }}</div>
       {% endif %}
     </div>
     {% endfor %}

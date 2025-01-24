@@ -8,7 +8,7 @@
             <div class="description pull-right">
                 <h3>{{awa.awarder}}</h3>
                 <p><i class="fas fa-trophy ico"></i> {{awa.title}}</p>
-                <p>{{awa.summary}}</p>
+                <p>{{awa.summary | markdown | safe}}</p>
             </div>
         </li>
         {%- endfor %}

@@ -40,7 +40,7 @@
             <h3>{{ language.titles.summary }}</h3>
         </aside>
         <div class="col-sm-9">
-            <p>{{ basics.summary }}</p>
+            <p>{{ basics.summary | markdown | safe}}</p>
         </div>
     </section>
     {%- endif %}
@@ -128,14 +128,14 @@
                     </div>
                     {% if item.summary -%}
                     <div class="summary">
-                        <p>{{ item.summary }}</p>
+                        <p>{{ item.summary | markdown | safe }}</p>
                     </div>
                     {%- endif %}
                     {% if item.highlights %}
                     <h5>{{ language.phrases.highlights }}</h5>
                     <ul class="highlights">
                         {% for highlight in item.highlights %}
-                        <li class="bullet">{{ highlight }}</li>
+                        <li class="bullet">{{ highlight | markdown | safe }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}
@@ -168,13 +168,13 @@
                         {{ item.position }}
                     </div>
                     <div class="summary">
-                        <p>{{ item.summary }}</p>
+                        <p>{{ item.summary | markdown | safe }}</p>
                     </div>
                     {% if item.highlights %}
                     <h5>{{ language.phrases.highlights }}</h5>
                     <ul class="highlights">
                         {% for highlight in item.highlights %}
-                        <li class="bullet">{{ highlight }}</li>
+                        <li class="bullet">{{ highlight | markdown | safe }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}
@@ -210,7 +210,7 @@
                     <h5>Courses</h5>
                     <ul class="courses">
                         {% for course in item.courses %}
-                        <li>{{ course }}</li>
+                        <li>{{ course | markdown | safe }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}
@@ -242,7 +242,7 @@
                         <strong>{{ award.awarder }}</strong>
                     </div>
                     <div class="summary">
-                        {{ award.summary }}
+                        {{ award.summary | markdown | safe }}
                     </div>
                 </div>
                 {% endfor %}
@@ -274,7 +274,7 @@
                         <strong>{{ publication.publisher }}</strong>
                     </div>
                     <div class="summary">
-                        <p>{{ publication.summary }}</p>
+                        <p>{{ publication.summary | markdown | safe }}</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -325,7 +325,7 @@
                 <p class="keywords small">#{{ project.keywords | join(' #') | lower }}</p>
                 {% endif %}
                 <div class="summary">
-                    <p>{{ project.description }}</p>
+                    <p>{{ project.description | markdown | safe }}</p>
                 </div>
                 {% if "url" in project %}
                 <div class="website">

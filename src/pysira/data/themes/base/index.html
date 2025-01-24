@@ -24,7 +24,7 @@
 
         {% if basics.summary -%}
         <h3>About</h3>
-        <p>{{ basics.summary }}</p>
+        <p>{{ basics.summary | markdown | safe }}</p>
         {%- endif %}
 
         {% if basics.profiles -%}

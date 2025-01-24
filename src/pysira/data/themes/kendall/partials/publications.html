@@ -14,7 +14,7 @@
           <a href="{{pub.publisher}}" target= "_blank"><i class="fas fa-globe ico"></i> {{pub.publisher}}</a>
         </div>
         {%- endif %}
-        {% if pub.summary -%}<p>{{ pub.summary }}</p>{% endif %}
+        {% if pub.summary -%}<p>{{ pub.summary | markdown | safe}}</p>{% endif %}
       </div>
     </div>
     {%- endfor %}

@@ -55,12 +55,12 @@
       {% endif %}
       <div class="item" id="work-item">
         {% if work_item.summary %}
-        <div class="summary">{{ work_item.summary | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
+        <div class="summary">{{ work_item.summary | markdown | safe | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
         {% endif %}
         {% if work_item.highlights %}
         <ul class="highlights">
           {% for  highlight in work_item.highlights %}
-            <li>{{ highlight | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</li>
+            <li>{{ highlight | markdown | safe | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</li>
           {% endfor %}
         </ul>
         {% endif %}

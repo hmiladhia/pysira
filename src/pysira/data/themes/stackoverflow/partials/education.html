@@ -69,7 +69,7 @@
       {% if education_item.courses %}
       <ul class="courses">
         {% for course in education_item.courses %}
-        <li>{{ course }}</li>
+        <li>{{ course | markdown | safe }}</li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -81,7 +81,7 @@
         </div>
         {% endif %}
         {% if education_item.summary %}
-          <div class="summary">{{ education_item.summary | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
+          <div class="summary">{{ education_item.summary| markdown | safe }}</div>
         {% endif %}
       </div>
     </section>
