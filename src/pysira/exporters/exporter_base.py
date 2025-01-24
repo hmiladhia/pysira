@@ -14,7 +14,7 @@ class ExporterBase(ABC):
     @staticmethod
     def get_language_data(language: str) -> dict[str]:
         language_path = LANGUAGE_DIR / f"{language}.json"
-        lang = json.loads(language_path.read_text())
+        lang = json.loads(language_path.read_text(encoding="utf-8"))
         lang["id"] = language
         return lang
 
@@ -30,7 +30,7 @@ class ExporterBase(ABC):
             for key in keys:
                 current_ctx = current_ctx.setdefault(key, {})
 
-            current_ctx.update(json.loads(file.read_text()))
+            current_ctx.update(json.loads(file.read_text(encoding="utf-8")))
 
         return extra
 
