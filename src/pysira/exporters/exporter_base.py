@@ -12,10 +12,19 @@ if TYPE_CHECKING:
 
 class ExporterBase(ABC):
     @staticmethod
-    def get_language_data(language: str) -> dict[str]:
+    def get_language_data(
+        language: str, overrides: dict[str, str] | None = None
+    ) -> dict[str]:
         language_path = LANGUAGE_DIR / f"{language}.json"
         lang = json.loads(language_path.read_text(encoding="utf-8"))
         lang["id"] = language
+
+        for keys, value in (overrides or {}).items():
+            scoped_lang = lang
+            key_list = keys.split(".")
+            for key in key_list[:-1]:
+                scoped_lang = scoped_lang.setdefault(key, {})
+            scoped_lang[key_list[-1]] = value
         return lang
 
     @staticmethod

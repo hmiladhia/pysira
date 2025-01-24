@@ -5,6 +5,7 @@ TEMPLATES_DIR = DATA_DIR / "templates"
 THEMES_DIR = DATA_DIR / "themes"
 EXTRA_DIR = DATA_DIR / "extra"
 LANGUAGE_DIR = DATA_DIR / "language"
+LANGUAGE_OVERRIDES_KEY = "language_overrides"
 
 
 __version__ = "0.1.0"
