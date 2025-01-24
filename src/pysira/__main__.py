@@ -57,7 +57,7 @@ def export(
     options_dict: dict[str] | None = None
     if options:
         options_path = Path(options)
-        options_dict = json.loads(options_path.read_text())
+        options_dict = json.loads(options_path.read_text(encoding="utf-8"))
         options_dict["static"] = [
             Path(p) if Path(p).is_absolute() else options_path.parent / p
             for p in options_dict.pop("static", [])
