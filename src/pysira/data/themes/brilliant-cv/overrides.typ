@@ -1,4 +1,7 @@
+#import "@preview/cmarker:0.1.1": render as markdown
 #import "lib/brilliant-cv.typ": cv, cvSection, cvEntry, cvHonor, hBar, cvSkill, cvPublication
+
+#let diomand() = [#h(3pt) #sym.diamond.filled #h(3pt)]
 
 #let resume = yaml("resume.yaml")
 #let options = yaml("options.yaml")
@@ -124,8 +127,8 @@
   metadata.insert("language", language.id)
 
   let additional_info = (
-    "header_quote": personal.at("summary", default: "").split("\n").at(0),
-    "cv_footer": options.at("footer", default: "")
+    "header_quote": markdown(personal.at("summary", default: "").split("\n").at(0)),
+    "cv_footer": markdown(options.at("footer", default: ""))
   )
 
   metadata.insert("lang", (language.id: additional_info))

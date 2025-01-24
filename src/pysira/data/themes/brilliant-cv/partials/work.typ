@@ -1,4 +1,4 @@
-#import "../overrides.typ": cvSection, cvEntry, language, resume, format_cv_date, resume_has
+#import "../overrides.typ": cvSection, cvEntry, language, resume, format_cv_date, resume_has, markdown
 
 #if resume_has("work") {
 
@@ -6,11 +6,11 @@
 
   for work in resume.work {
     cvEntry(
-      title: [#work.position],
-      society: [#work.at("name", default: "")],
+      title: markdown(work.position),
+      society: markdown(work.at("name", default: "")),
       date: format_cv_date(work),
-      location: [#work.at("location", default: "")],
-      description: list(..work.highlights),
+      location: markdown(work.at("location", default: "")),
+      description: list(..work.highlights.map(markdown)),
       tags: work.at("keywords", default: ()),
     )
   }

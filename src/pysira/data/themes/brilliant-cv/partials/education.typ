@@ -1,4 +1,4 @@
-#import "../overrides.typ": cvSection, cvEntry, language, resume, format_cv_date, resume_has
+#import "../overrides.typ": cvSection, cvEntry, language, resume, format_cv_date, resume_has, markdown
 
 #if resume_has("education") {
 
@@ -12,13 +12,14 @@
     if "studyType" in ed.keys() {title.push(ed.studyType)}
     if "area" in ed.keys() {title.push(ed.area)}
     let title=title.join(" - ")
+
     cvEntry(
-      title: [#title],
-      society: [#ed.institution],
+      title: markdown(title),
+      society: markdown(ed.institution),
       date: format_cv_date(ed),
-      location: [#ed.at("location", default: "")],
+      location: markdown(ed.at("location", default: "")),
       description: list(
-        ..desc.flatten()
+        ..desc.flatten.map(markdown)
       ),
     )
   }
