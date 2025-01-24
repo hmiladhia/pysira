@@ -11,6 +11,7 @@ dependencies = [
     'importlib-metadata; python_version<"3.8"',
     "typst>=0.12.2",
     "markdown>=3.7",
+    "beautifulsoup4>=4.12.3",
 ]
 license = {text = "MIT"}
 dynamic = ["version", "readme"]

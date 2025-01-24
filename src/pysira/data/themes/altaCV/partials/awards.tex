@@ -2,7 +2,7 @@
 \cvsection{\VAR{ language.titles.awards }}
 
 \BLOCK{ for award in awards -}
-\cvachievement{\faTrophy}{\VAR{award.title}}{\VAR{award.summary}}
+\cvachievement{\faTrophy}{\VAR{award.title}}{\VAR{award.summary | markdown }}
 
 \VAR{ "\divider" if not loop.last else "" }
 \BLOCK{ endfor -}

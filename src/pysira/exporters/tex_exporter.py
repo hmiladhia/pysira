@@ -9,6 +9,8 @@ from pathlib import Path
 from subprocess import PIPE
 from typing import TYPE_CHECKING
 
+import markdown
+from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from pysira import TEMPLATES_DIR, LANGUAGE_OVERRIDES_KEY
@@ -66,6 +68,7 @@ class LatexExporter(ExporterBase):
         env.filters["escape"] = tex_escape
         env.filters["parse_date"] = parse_date
         env.filters["append"] = append
+        env.filters["markdown"] = markdown_to_text
 
         self.template = env.get_template(template_path)
         self.secondary_templates = {
@@ -172,3 +175,18 @@ def tex_escape(text: str) -> str:
         return text
 
     return _ESCAPE_REGEX.sub(lambda match: _CONV[match.group()], text)
+
+
+def markdown_to_text(text: str) -> str:
+    """
+    Escape special characters.
+
+    :param text: a plain text message
+    :return: the message escaped to appear correctly in LaTeX
+    """
+    if not isinstance(text, str):
+        return text
+
+    html = markdown.markdown(text)
+    soup = BeautifulSoup(html, features="html.parser")
+    return soup.get_text(strip=True)
