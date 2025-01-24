@@ -7,7 +7,7 @@
       <ul class="list-unstyled clear-margin">
         {% for skill in skills %}
         <li class="card card-nested card-skills">
-          <div class="skill-info"><strong>{{skill.name}}</strong>
+          <div class="skill-info"><strong>{{skill.name | markdown}}</strong>
             <div class="space-top labels">
               {% for keyword in skill.keywords %}
               <span class="label label-keyword">

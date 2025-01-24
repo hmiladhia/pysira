@@ -6,9 +6,9 @@
     <div class="content">
       <ul class="list-unstyled clear-margin">
         {% for ref in references %}
-        <li class="card card-nested">{{ref.name}}<blockquote class="quote">
+        <li class="card card-nested">{{ref.name | markdown}}<blockquote class="quote">
             <div class="mop-wrapper">
-              <p>{{ref.reference}}</p>
+              <p>{{ref.reference | markdown}}</p>
             </div>
           </blockquote>
         </li>

@@ -7,6 +7,7 @@ from mimetypes import guess_type
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import markdown
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from pysira import TEMPLATES_DIR, LANGUAGE_OVERRIDES_KEY
@@ -37,6 +38,7 @@ class HtmlExporter(ExporterBase):
 
         env.filters["parse_date"] = parse_date
         env.filters["append"] = append
+        env.filters["markdown"] = markdown.markdown
 
         self.template = env.get_template(template_path)
         self.secondary_templates = {

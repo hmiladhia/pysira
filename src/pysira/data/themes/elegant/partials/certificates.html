@@ -9,7 +9,7 @@
                 <li class="card card-nested">
                     <div class="content">
                         <p class="clear-margin" itemprop="certificate"><strong><a href="{{cer.url}}"
-                                    target="_blank">{{cer.name}}</a>,&nbsp;</strong>{{cer.issuer}}</p>
+                                    target="_blank">{{cer.name | markdown}}</a>,&nbsp;</strong>{{cer.issuer| markdown}}</p>
                         <p class="text-muted"><small>Issued on: dates.to_date_range(cer.startDate, cer.startDateMonth,
                             cer.startDateYear, cer.endDate, cer.endDateMonth, cer.endDateYear)</small></p>
                     </div>

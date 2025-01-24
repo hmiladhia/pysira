@@ -8,7 +8,7 @@
                 {% for awa in awards %}
                 <li class="card card-nested">
                     <div class="content">
-                        <p class="clear-margin" itemprop="award"><strong>{{awa.title}} </strong>,&nbsp;{{awa.awarder}}
+                        <p class="clear-margin" itemprop="award"><strong>{{awa.title | markdown}} </strong>,&nbsp;{{awa.awarder | markdown}}
                         </p>
                         <!-- TODO: update date -->
                         <p class="text-muted"><small>Awarded on: </small></p>
