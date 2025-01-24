@@ -147,13 +147,13 @@ class LatexExporter(ExporterBase):
         latex = self.template.render(
             **resume_dict, language=language, options=options, extra=extra
         )
-        target_path.write_text(latex)
+        target_path.write_text(latex, encoding="utf-8")
 
         for sec_path, template in self.secondary_templates.items():
             latex = template.render(
                 **resume_dict, language=language, options=options, extra=extra
             )
-            target_path.parent.joinpath(sec_path).write_text(latex)
+            target_path.parent.joinpath(sec_path).write_text(latex, encoding="utf-8")
 
 
 # Custom filter methods

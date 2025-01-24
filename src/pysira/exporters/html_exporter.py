@@ -119,12 +119,12 @@ class HtmlExporter(ExporterBase):
         html = self.template.render(
             **resume_dict, language=language, options=options, extra=extra
         )
-        target_path.write_text(html)
+        target_path.write_text(html, encoding="utf-8")
         for sec_path, template in self.secondary_templates.items():
             html = template.render(
                 **resume_dict, language=language, options=options, extra=extra
             )
-            target_path.parent.joinpath(sec_path).write_text(html)
+            target_path.parent.joinpath(sec_path).write_text(html, encoding="utf-8")
 
     def _render_pyppdf(
         self,
