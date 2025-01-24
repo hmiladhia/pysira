@@ -7,8 +7,8 @@
   for cert in resume.certificates {
     cvHonor(
       date: extract_year(cert.date),
-      title: markdown(cert.name),
-      issuer: markdown(cert.at("issuer", default: "")),
+      title: cert.name,
+      issuer: cert.at("issuer", default: ""),
       url: cert.at("url", default: ""),
     )
   }

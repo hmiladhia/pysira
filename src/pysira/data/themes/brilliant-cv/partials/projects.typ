@@ -9,14 +9,14 @@
     desc.push(project.at("highlights", default: ()))
 
     let description = []
-    if "description" in project.keys() {description = markdown(project.description) + linebreak()}
-    if "highlights" in project.keys() {description = description + list(..project.highlights.map(markdown))}
+    if "description" in project.keys() {description = markdown(project.description)}
+    if "highlights" in project.keys() {description = [#description #list(..project.highlights.map(markdown))]}
 
     cvEntry(
       title: link(project.at("url", default: "")),
-      society: [#project.name],
+      society: project.name,
       date: format_cv_date(project),
-      location: [#project.at("location", default: "")],
+      location: project.at("location", default: ""),
       description: description,
       tags: project.keywords,
     )

@@ -14,10 +14,10 @@
     let title=title.join(" - ")
 
     cvEntry(
-      title: markdown(title),
-      society: markdown(ed.institution),
+      title: title,
+      society: ed.institution,
       date: format_cv_date(ed),
-      location: markdown(ed.at("location", default: "")),
+      location: ed.at("location", default: ""),
       description: list(
         ..desc.flatten().map(markdown)
       ),

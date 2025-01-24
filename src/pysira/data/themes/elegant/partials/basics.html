@@ -6,7 +6,7 @@
             <div class="profile-pic"><img class="media-object img-circle center-block" data-src="holder.js/100x100" alt="{{basics.name}}" src="{% if basics.image_b64 %}data:{{ basics.image_b64_mime_type | d('image/png')}};base64,{{ basics.image_b64 | safe }}{% elif basics.image %}{{ basics.image }}{% else %}data:{{extra.image_b64.anonymous.type}};base64,{{ extra.image_b64.anonymous.bytes | safe }}{% endif %}" itemprop="image"></div>
             <div class="name-and-profession text-center">
                 {% if basics.name %}<h3 itemprop="name"><b>{{basics.name}}</b></h3>{% endif %}
-                {% if basics.label %}<h5 class="text-muted" itemprop="jobTitle">{{basics.label | markdown}}</h5>{% endif %}
+                {% if basics.label %}<h5 class="text-muted" itemprop="jobTitle">{{basics.label }}</h5>{% endif %}
             </div>
         </span>
         <hr>
