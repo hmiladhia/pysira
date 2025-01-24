@@ -5,6 +5,7 @@ from pathlib import Path
 
 import click
 
+from pysira import LANGUAGE_OVERRIDES_KEY
 from pysira.exporters import ExportFactory
 from pysira.json_resume import Resume
 
@@ -25,6 +26,7 @@ def cli() -> None:
 @click.option("--projects", "-p", type=int, default=None)
 @click.option("--skills", "-s", type=int, default=None)
 @click.option("--certificates", "-c", type=int, default=None)
+@click.option("--lang-override", "-lo", type=(str, str), default=None, multiple=True)
 @click.option(
     "--summary/--no-summary",
     "--about/--no-about",
@@ -47,6 +49,7 @@ def export(
     yaml: bool,
     language: str,
     options: str,
+    lang_override: list[tuple[str, str]],
 ) -> None:
     resume = Resume.from_yaml(resume_path) if yaml else Resume.from_json(resume_path)
     resume = resume.abbreviate(work, projects, skills, certificates, summary=summary)
@@ -54,7 +57,7 @@ def export(
     factory = ExportFactory(theme)
     exp = factory.build()
 
-    options_dict: dict[str] | None = None
+    options_dict: dict[str] = {}
     if options:
         options_path = Path(options)
         options_dict = json.loads(options_path.read_text(encoding="utf-8"))
@@ -62,6 +65,9 @@ def export(
             Path(p) if Path(p).is_absolute() else options_path.parent / p
             for p in options_dict.pop("static", [])
         ]
+
+    if lang_override:
+        options_dict[LANGUAGE_OVERRIDES_KEY] = dict(lang_override)
 
     exp.render(resume, output, format_, language=language, options=options_dict)
 

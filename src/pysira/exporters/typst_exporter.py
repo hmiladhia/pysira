@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 import yaml
 
+from pysira import LANGUAGE_OVERRIDES_KEY
 from pysira.exporters.exporter_base import ExporterBase
 
 if TYPE_CHECKING:
@@ -55,7 +56,9 @@ class TypstExporter(ExporterBase):
     ) -> str:
         options = options or {}
         additional_paths = [Path(p) for p in options.pop("static", [])]
-        language = self.get_language_data(language or resume.language)
+        language = self.get_language_data(
+            language or resume.language, options.get(LANGUAGE_OVERRIDES_KEY)
+        )
         extra = self.get_extra_data(self.EXT)
 
         resume_dict = resume.dict

@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from pysira import TEMPLATES_DIR
+from pysira import TEMPLATES_DIR, LANGUAGE_OVERRIDES_KEY
 from pysira.exporters.common import append, parse_date
 from pysira.exporters.exporter_base import ExporterBase
 
@@ -86,7 +86,9 @@ class HtmlExporter(ExporterBase):
     ) -> None:
         options = options or {}
         additional_paths = [Path(p) for p in options.pop("static", [])]
-        language = self.get_language_data(language or resume.language)
+        language = self.get_language_data(
+            language or resume.language, options.get(LANGUAGE_OVERRIDES_KEY)
+        )
         extra = self.get_extra_data(self.EXT)
         resume_dict = resume.dict
 
