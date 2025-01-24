@@ -11,6 +11,7 @@
       date: format_cv_date(work),
       location: [#work.at("location", default: "")],
       description: list(..work.highlights),
+      tags: work.at("keywords", default: ()),
     )
   }
 }
