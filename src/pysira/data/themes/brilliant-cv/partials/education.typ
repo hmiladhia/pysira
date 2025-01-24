@@ -19,7 +19,7 @@
       date: format_cv_date(ed),
       location: markdown(ed.at("location", default: "")),
       description: list(
-        ..desc.flatten.map(markdown)
+        ..desc.flatten().map(markdown)
       ),
     )
   }
