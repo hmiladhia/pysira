@@ -11,6 +11,8 @@ class ExportFactory:
     def __init__(self, theme_name: str) -> None:
         theme_path = THEMES_DIR / theme_name
         config_path = theme_path / "config.json"
+        if not config_path.exists():
+            raise ValueError(f"Theme not found: {theme_name}")
         self.config = json.loads(config_path.read_text())
         self.config["theme_path"] = str(theme_path.resolve())
 

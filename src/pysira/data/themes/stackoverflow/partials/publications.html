@@ -50,7 +50,7 @@
 
       <div class="item">
         {% if publication.summary %}
-          <div class="summary">{{ publication.summary | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
+          <div class="summary">{{ publication.summary| markdown | safe | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
         {% endif %}
       </div>
     </section>

@@ -83,7 +83,7 @@
 	{% if basics.summary %}
 	<section class="section">
 		<section class="main-summary">
-			<div>{{ basics.summary | replace("\r\n", "<br>") | replace("\n", "<br>") | replace("\r", "<br>") }}</div>
+			<div>{{ basics.summary | markdown | safe }}</div>
 		</section>
 	</section>
 	{% endif %}

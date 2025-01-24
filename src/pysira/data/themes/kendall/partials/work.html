@@ -26,12 +26,12 @@
             <div class="job-details col-xs-11">
                 <div class="profession">{{ job.position }}</div>
                 <div class="description">
-                    {% if job.summary %}{{job.summary}}{%- endif %}
+                    {% if job.summary %}{{job.summary| markdown | safe}}{%- endif %}
                     {% if job.highlights -%}
                     <div class="highlights">{{ language.phrases.highlights }}</div>
                     <ul class="list-group">
                         {% for hig in job.highlights -%}
-                            <li class="list-group-item">{{hig}}</li>
+                            <li class="list-group-item">{{ hig | markdown | safe }}</li>
                         {%- endfor %}
                     </ul>
                     {%- endif %}
