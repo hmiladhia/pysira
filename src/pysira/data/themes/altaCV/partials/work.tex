@@ -8,7 +8,7 @@
 \BLOCK{ if w.highlights }
 \begin{itemize}
 \BLOCK{ for highlight in w.highlights }
-  \item \VAR{highlight | escape}
+  \item \VAR{highlight | markdown | escape}
 \BLOCK{ endfor }
 \end{itemize}
 \BLOCK{ endif }

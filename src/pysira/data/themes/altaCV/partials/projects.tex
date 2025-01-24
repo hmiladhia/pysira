@@ -17,13 +17,13 @@
 \cvevent{\VAR{ icon } \BLOCK{ if p.url }\href{\VAR{p.url}}{\VAR{p.name | escape }}\BLOCK{ else }\VAR{p.name}\BLOCK{ endif }}{\VAR{keywords(p.keywords)}}{\VAR{dates.to_date_range(p.startDate, p.endDate)}}{}
 
 \BLOCK{ if p.description }
-\VAR{ p.description | escape }
+\VAR{ p.description | markdown | escape }
 \BLOCK{ endif }
 
 \BLOCK{ if p.highlights }
 \begin{itemize}
   \BLOCK{ for highlight in p.highlights }
-    \item \VAR{highlight | escape }
+    \item \VAR{highlight | markdown | escape }
   \BLOCK{ endfor }
 \end{itemize}
 \BLOCK{ endif }
