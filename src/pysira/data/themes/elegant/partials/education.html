@@ -12,7 +12,7 @@
               <p class="clear-margin relative">
                 <!-- <strong>{{edu.area}}, {{edu.studyType}},&nbsp;</strong> -->
                 <strong>{{ [edu.area, edu.studyType] | select('defined') | join(', ')}},&nbsp;</strong>
-                {% if edu.institution %}{{edu.institution | markdown}}{% endif %}
+                {% if edu.institution %}{{edu.institution }}{% endif %}
               </p>
               <p class="text-muted clear-margin"><small>{{dates.to_date_range(edu.startDate, edu.endDate)}}</small></p><i></i>
             </div>

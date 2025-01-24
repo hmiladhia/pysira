@@ -1,4 +1,4 @@
-#import "../overrides.typ": cvSection, cvSkill, diomand, get, language, resume, format_cv_date, resume_has, markdown
+#import "../overrides.typ": cvSection, cvSkill, diomand, get, language, resume, format_cv_date, resume_has
 
 
 #if resume_has("skills") {
@@ -14,7 +14,7 @@
 
   for skill in resume.at("skills", default: ()) {
     cvSkill(
-      type: markdown(skill.name),
+      type: skill.name,
       info: skill.keywords.join(diomand()),
     )
   }
