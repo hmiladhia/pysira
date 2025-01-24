@@ -1,4 +1,4 @@
-#import "../overrides.typ": cvSection, cvEntry, language, resume, format_cv_date, resume_has
+#import "../overrides.typ": cvSection, cvEntry, language, resume, format_cv_date, resume_has, markdown
 
 #if resume_has("projects") {
 
@@ -9,8 +9,8 @@
     desc.push(project.at("highlights", default: ()))
 
     let description = []
-    if "description" in project.keys() {description = project.description + linebreak()}
-    if "highlights" in project.keys() {description = description + list(..project.highlights)}
+    if "description" in project.keys() {description = markdown(project.description) + linebreak()}
+    if "highlights" in project.keys() {description = description + list(..project.highlights.map(markdown))}
 
     cvEntry(
       title: link(project.at("url", default: "")),
