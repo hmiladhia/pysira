@@ -10,19 +10,20 @@
                 <div class="content">
                     <p class="clear-margin relative">
                         {% if not pro.endDate %}<i class="icon-circle current-event" rel="tooltip" title="Currently Working" data-placement="left"></i>{% endif %}
-                        <a href="{{pro.url}}" target="_blank"><strong>{{ pro.name | d(pro.url) }}</strong></a>
+                        <a href="{{pro.url}}" target="_blank"><strong>{{ pro.name | d(pro.url) | markdown}}</strong></a>
                     </p>
                     <p class="text-muted"><small><span class="space-right">{{dates.to_date_range(pro.startDate, pro.endDate)}}</span></small></p>
                     {% if pro.description %}
                     <div class="mop-wrapper space-bottom">
-                        <p>{{pro.description}}</p>
+                        <p>{{pro.description | markdown}}</p>
                     </div>
                     {% endif %}
                     {% if pro.highlights %}
                     <ul>
                         {% for hig in pro.highlights %}
                         <li class="mop-wrapper">
-                            <p>{{hig}}</p>
+                            <p>{{hig | markdown}}</p>
+                            <p>{{hig | markdown}}</p>
                         </li>
                         {% endfor %}
                     </ul>

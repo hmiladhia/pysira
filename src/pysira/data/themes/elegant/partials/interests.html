@@ -7,7 +7,7 @@
       <ul class="list-unstyled clear-margin">
         {% for int in interests %}
         <li class="card card-nested">
-          <p><strong>{{int.name}}</strong></p>
+          <p><strong>{{int.name | markdown}}</strong></p>
         </li>
         {% endfor %}
       </ul>

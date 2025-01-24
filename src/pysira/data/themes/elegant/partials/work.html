@@ -9,19 +9,19 @@
                 <div class="content">
                     <p class="clear-margin relative">
                         {% if not wor.endDate %}<i class="icon-circle current-event" rel="tooltip" title="Currently Working" data-placement="left"></i>{% endif %}
-                        <strong>{{wor.position}}</strong>,&nbsp;{{wor.name}}
+                        <strong>{{wor.position| markdown}}</strong>,&nbsp;{{wor.name| markdown}}
                     </p>
                     <p class="text-muted"><small><span class="space-right">{{dates.to_date_range(wor.startDate, wor.endDate)}}</span></small></p>
                     {% if wor.summary %}
                     <div class="mop-wrapper space-bottom">
-                        <p>{{wor.summary}}</p>
+                        <p>{{wor.summary| markdown}}</p>
                     </div>
                     {% endif %}
                     {% if wor.highlights %}
                     <ul>
                         {% for hig in wor.highlights %}
                         <li class="mop-wrapper">
-                            <p>{{hig}}</p>
+                            <p>{{hig| markdown}}</p>
                         </li>
                         {% endfor %}
                     </ul>
